@@ -1,0 +1,114 @@
+/*全局字体*/
+* {font-family: Arial,"Microsoft YaHei","黑体","宋体",sans-serif;}
+p,dd,li,td {font-size: 16px;}
+
+/*标题*/
+div.head {height: 70px; background:#222c38;}
+div.head img {position: absolute;
+              left: 10%}
+div.head p {color:#999; 
+            position: absolute;
+            left: 650px;
+            top: 12px;
+            font-size: 30px}
+div.head0 img{ width:100%;}
+
+/*块宽度位置背景*/
+* { margin:0; padding:0; }
+div#body {width: 100%;}
+div.section1 {width: 100%; background-color: #FFFFF5;}
+div.section2 {width: 100%; background-color: #F5FFFF;}
+div.desc {width: 960px; margin: 0 auto;}
+
+/*所有段落行间距*/
+p {line-height: 150%;}
+div.part1 td {height: 30px; line-height: 150%;}
+.fmenber td {height: 30px; line-height: 150%;}
+.fmenber li {height: 30px; line-height: 150%;}
+
+
+/*特殊字体*/
+h1 {color: #4682B4; text-align: center; font-size: 50px;}
+h2 {color: #87CEEB;}
+h3 {color: #87CEEB;}
+.big {font-size: 70px; color: #FF8C00;}
+.col-red {color: #FF0000;}
+.teacher {font-size: 30px;}
+.col-org {color: #FF8C00;}
+
+/*title字体位置*/
+
+/*报名方式加粗字体*/
+.bold {font-weight: bold; text-align: center;}
+
+/*超链接字体*/
+.col-link:link {color: #0099FF; text-decoration: none;}
+.col-link:visited {color: #0099FF; text-decoration: none;}
+.col-link:hover {color: #0099FF; text-decoration: underline}
+/*列表样式*/
+dl.dl0 {margin-top: 10px;}
+dl.dl0 dt {font-weight: bold }
+dl.dl0 li {list-style: square outside;line-height: 150%;}
+/*表格样式*/
+
+.tab td ul li
+{
+  list-style-type: none;
+}
+.tab td
+{
+  padding: 5px;
+}
+table.tab{ border-collapse:collapse; } 
+table.list-table {border-collapse: collapse;
+                  width:100%;
+                  }
+table.list-table th,table.list-table td
+                 {font-size: 14px; 
+                  padding: 10px 15px;
+                  border: 1px solid #D0D0D0;}
+table.list-table th {font-weight: bold; text-align: center}
+table.list-table tr.oee th {background-color: #E0E0E0;}
+table.list-table tr.odd td {background-color: #F0F0F0;}
+table.list-table th.th0 {width: 10%}
+table.list-table td.th0 {width: 10%}
+
+.going {line-height: 50px;text-align: center;font-size: 35px;padding: 50px;}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #FFFFFF;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #4682B4}
+.btn:hover
+{
+    background-color: #87CEEB;
+}
+
+/*footer*/
+.footer{ clear:both; width:100%; background:#222c38; color:#596470;float:left;}
+.newf_top{ width:1180px; margin:0 auto; border-bottom:1px solid #1c252f; padding-bottom:20px; padding-top:25px;}
+.newf{ height:68px; border-right:1px solid #1c252f; position:relative; float:left;}
+.newf_l{ width:45%; line-height:68px;}
+.newf_about{ width:30px; height:34px; background:url(http://dotcpp.com/templets/default/images/f_person.png) no-repeat; margin-left:6.8%; margin-top:17px; float:left;}
+.newf_l a{ display:inline-block; padding-left:6.8%; color:#596470; font-size: 14px;}
+.newf_l a:hover{ color:#ffffff; text-decoration:none;}
+.newf_cl{ width:31%;}
+.newf_cr{ width:19%;}
+.newf_r{ width:18%; height:68px; float:left;}
+.newf_cl p{ height:44px; line-height:22px; padding-left:4.8%; padding-top:12px; float:right; font-size: 14px;}
+.newf_phone{ width:44px; height:44px; background:url(http://dotcpp.com/templets/default/images/f_phone.png) no-repeat; margin-left:10%; margin-top:12px; float:left;}
+.newf_bot{ width:100%; height:55px; line-height:55px; text-align:center; font-size:12px; float:left;}
+.newf_l {font-size: 14px;}
+/**/
+/**/
+/**/

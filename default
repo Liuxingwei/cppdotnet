@@ -1,0 +1,234 @@
+# You may add here your
+# server {
+#	...
+# }
+# statements for each of your virtual hosts to this file
+
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+server {
+	listen 			80;
+	server_name		dotcpp.com;
+	return      301 http://www.dotcpp.com$request_uri;
+}
+server {
+    listen          80;
+    server_name     edu.dotcpp.com;
+
+    location / {
+        root /home/judge/src/web/www_edu;
+        index  index.html index.htm index.php;
+    }
+}
+server {
+    listen          80 ;
+    server_name     blog.dotcpp.com;
+
+    location / {
+        root /home/judge/src/web/blog;
+        index index.php index.html index.htm;
+    
+	    location ~ \.php$ {
+			fastcgi_split_path_info ^(.+\.php)(/.+)$;
+			fastcgi_pass unix:/var/run/php5-fpm.sock;
+			fastcgi_index index.php;
+			include fastcgi_params;
+		}
+
+		rewrite ^/(\w+)/$ /blog_user.php?user_id=$1 ;
+		rewrite ^/(\w+)$ http://blog.dotcpp.com/$1/ permanent;
+		rewrite ^/(\w+)/page(\d+)$ /blog_user.php?user_id=$1&page=$2 ;
+		rewrite ^/blogskip/(\d+)$ /blog_skip.php?blog_id=$1 ;
+		rewrite ^/blogskip/(\d+)-(\d+)$ /blog_skip.php?blog_id=$1&page=$2 ;
+		rewrite ^/(\w+)/(\d+)$ /blog_detail.php?user_id=$1&blog_id=$2 ;
+		rewrite ^/(\w+)/(\d+)-(\d+)$ /blog_detail.php?user_id=$1&blog_id=$2&page=$3 ;
+		rewrite ^/article/edit$ /userblog_edit.php ;
+		rewrite ^/article/aedit(\d+)$ /blog_edit.php?id=$1 ;
+		rewrite ^/article/redit(\d+)$ /blog_redit.php?blog_id=$1 ;
+		rewrite ^/article/alist(\d+)/$ /blog_list.php?id=$1 ;
+		rewrite ^/article/alist(\d+)$ http://blog.dotcpp.com/article/alist$1/ permanent;
+		rewrite ^/article/list/(.*)$ /blog_more.php$1 ;
+		rewrite ^/article/list$ http://blog.dotcpp.com/article/list/ permanent;
+	}
+}
+
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+
+	root /home/judge/src/web;
+	index index.php index.htm;
+
+	# Make site accessible from http://localhost/
+	server_name www.dotcpp.com;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+		# Uncomment to enable naxsi on this location
+		# include /etc/nginx/naxsi.rules
+	}
+
+	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
+	#location /RequestDenied {
+	#	proxy_pass http://127.0.0.1:8080;    
+	#}
+
+	#error_page 404 /404.html;
+
+	# redirect server error pages to the static page /50x.html
+	#
+	#error_page 500 502 503 504 /50x.html;
+	#location = /50x.html {
+	#	root /home/judge/src/web;
+	#}
+
+	# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+	#
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+	#	# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+	#
+	#	# With php5-cgi alone:
+	#	fastcgi_pass 127.0.0.1:9000;
+	#	# With php5-fpm:
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+
+		#wordpress
+		location /wp/ {
+			try_files $uri $uri/ /wp/index.php?$args;
+		}
+		# Add trailing slash to */wp-admin requests.
+		rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+
+		location /dotcppma/ {
+	        alias /usr/share/phpmyadmin/;
+	        index  index.php;
+	    }
+
+		#dotcpp rewrite
+		rewrite ^/oj/problem(\d+)\.html$ /oj/problem.php?id=$1 ;
+		rewrite ^/oj/contest(\d+)\.html$ /oj/contest.php?cid=$1 ;
+		rewrite ^/oj/contest\.html$ /oj/contest.php ;
+		rewrite ^/oj/(\w+)contest\.html$ /oj/contest.php?ctype=$1 ;
+		rewrite ^/oj/problemset\.html$ /oj/problemset.php ;
+		rewrite ^/oj/livelist\.html$ /oj/livelist.php ;
+		rewrite ^/oj/status\.html$ /oj/status.php ;
+		rewrite ^/oj/ranklist\.html$ /oj/ranklist.php ;
+		rewrite ^/home/(\w+)$ /oj/home_user.php?user_id=$1 ;
+		rewrite ^/oj/userinfo.php /home/$arg_user? permanent;
+
+		rewrite ^/home/blog/(\w+)$ https://blog.dotcpp.com/$1/ permanent;
+		rewrite ^/home/blog/(\w+)/page(\d+)$ https://blog.dotcpp.com/$1/page$2 permanent;
+		rewrite ^/blog/(\d+).html$ https://blog.dotcpp.com/blogskip/$1 permanent;
+		rewrite ^/blog/(\d+)-(\d+).html$ https://blog.dotcpp.com/blogskip/$1-$2 permanent;
+		rewrite ^/blog/edit$ https://blog.dotcpp.com/article/edit permanent;
+		rewrite ^/blog/aedit(\d+)$ https://blog.dotcpp.com/article/aedit$1 permanent;
+		rewrite ^/blog/alist(\d+)/$ https://blog.dotcpp.com/article/alist$1/ permanent;
+		rewrite ^/blog/alist(\d+)$ https://blog.dotcpp.com/article/alist$1/ permanent;
+		rewrite ^/blog/redit(\d+)$ https://blog.dotcpp.com/article/redit$1 permanent;
+		rewrite ^/blog/$ https://blog.dotcpp.com/ permanent;
+		rewrite ^/blog$ https://blog.dotcpp.com/ permanent;
+		rewrite ^/blog/list(.*)$ https://blog.dotcpp.com/article/list/$1 permanent;
+
+		rewrite ^/job/list(.*)$ /oj/job_list.php$1 ;
+		rewrite ^/job/(\d+).html$ /oj/job_detail.php?job_id=$1 ;
+		rewrite ^/job/mysend/(\w+)$ /oj/mysend.php?user_id=$1 ;
+		rewrite ^/job/mysend/$ /oj/mysend.php ;
+		rewrite ^/job/cpn /oj/cpn.php ;
+		rewrite ^/job/cpn-(\w+)$ /oj/cpn.php?cpn=$1 ;
+		rewrite ^/vipjoin/$ /oj/vipjoin.php ;
+		rewrite ^/vipstudy_(\w+)/study/$ /oj/study.php?subject=$1 ;
+		rewrite ^/vipstudy_(\w+)/study/(\d+)$ /oj/study.php?class=$2&subject=$1 ;
+		rewrite ^/vipstudy_(\w+)/problem/?(.*)$ /oj/vipproblem.php?$2&subject=$1 ;
+		rewrite ^/vipmb/order_check/$ /oj/payorder_check.php ;
+		rewrite ^/vipmb/order_create/$ /oj/payorder_create.php ;
+		rewrite ^/vipmb/order_pay/(\d+)$ /oj/payorder_pay.php?oid=$1 ;
+		rewrite ^/vipmb/order_success/(.*)$ /oj/payorder_success.php$1 ;
+		rewrite ^/vipmb/order_user/$ /oj/payorder_user.php ;
+		rewrite ^/course/cpp/(\d+).html$ /oj/tutorial_cpp.php?class=$1 ;
+		rewrite ^/course/c/(\d+).html$ /oj/tutorial_c.php?class=$1 ;
+		rewrite ^/course/c/$ /oj/tutorial_c.php ;
+		rewrite ^/course/cpp/$ /oj/tutorial_cpp.php ;
+		rewrite ^/oj/discuss(\d+)\.html$ /oj/discuss.php?id=$1 ;
+		rewrite ^/oj/contest(\d+)_problem(\d+)\.html$ /oj/problem.php?cid=$1&pid=$2 ;
+		rewrite ^/a/kecheng/ruanjianpeixun$ http://www.dotcpp.com/kecheng permanent;
+		rewrite ^/a/kecheng/ruanjianpeixun/$ http://www.dotcpp.com/kecheng permanent;
+		rewrite ^/c_video/$ http://edu.dotcpp.com/c_video/ permanent;
+		rewrite ^/oj/classc.html$ http://www.dotcpp.com/course/c/10101.html permanent;
+		rewrite ^/oj/classc(\d+).html$ http://www.dotcpp.com/course/c/10$1.html permanent;
+		rewrite ^/tag.html$ /oj/tag.php ;
+		rewrite ^/run/$ /oj/compiler_ol.php;
+		rewrite ^/run$ https://www.dotcpp.com/run/ permanent;	
+
+		if (!-e $request_filename){
+			rewrite ^/course/(\w+)/$ /oj/jiaocheng.php?sub=$1 ;
+			rewrite ^/oj/(\w+)/$ /oj/problemset.php?mark=$1 ;
+			rewrite ^/contest/(\w+)/$ /oj/contest.php?ctype=$1 ;
+			rewrite ^/job/(\w+)/$ /oj/job_list.php?position=$1 ;
+		}
+
+	#}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	#
+	#location ~ /\.ht {
+	#	deny all;
+	#}
+}
+
+
+# another virtual host using mix of IP-, name-, and port-based configuration
+#
+#server {
+#	listen 8000;
+#	listen somename:8080;
+#	server_name somename alias another.alias;
+#	root html;
+#	index index.php index.htm;
+#
+#	location / {
+#		try_files $uri $uri/ =404;
+#	}
+#}
+
+
+#HTTPS server
+
+#server {
+#	listen 443 ssl;
+#	server_name www.dotcpp.com;
+
+#	root /home/judge/src/web;
+#	index index.php index.htm;
+
+	#ssl on;
+#	ssl_certificate /etc/ssl/www.dotcpp.com_ca.crt;
+#	ssl_certificate_key /etc/ssl/www.dotcpp.com.key;
+
+#	ssl_session_timeout 5m;
+
+#	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+#	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+#	ssl_prefer_server_ciphers on;
+
+#	location / {
+#		try_files $uri $uri/ =404;
+#	}
+#}

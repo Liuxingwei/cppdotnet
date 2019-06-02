@@ -1,0 +1,148 @@
+.div-reg label {
+	font-weight: normal;
+}
+.div-login {
+	margin: auto;
+	margin-top: 30px;
+	width: 680px;
+	background: #F6F9FF;
+}
+.login_h1 {
+	font-size: 20px;
+}
+
+.login_h1 {
+	width: 50%;
+	margin: 0px;
+	padding: 15px;
+	border: 1px solid #c0cdd9;
+}
+.div_loginhead {
+    position: relative;
+    top: 1px;
+}
+.div_loginhead a {
+    color: #666;
+}
+.div_loginform {
+    border: 1px solid #c0cdd9;
+    border-top: 0px;
+    padding-top: 20px;
+}
+.div_loginform_login {
+	width: 45%;
+	height: 300px;
+	margin: auto;
+	margin-top: 30px;
+}
+.div_loginform_register {
+	height: 300px;
+	margin-top: 30px;
+}
+.login_h1_1 {
+    font-weight: normal;
+    background: #FBFBFF;
+}
+.login_h1_1:hover {
+    background: #F0F8FF;
+}
+label.login_h1_2 {
+    border-bottom: 0px;
+    font-weight: 700;
+}
+.login_h1_border_r {
+    border-right: 2px solid #c0cdd9;
+}
+.login_h1_r {
+    border-left: 0px;
+}
+.border2_l {
+    border-left: 2px solid #c0cdd9;
+}
+.border2_r {
+	border-right: 2px solid #c0cdd9;
+}
+.border0_r {
+	border-right: 0px;
+}
+.border0_l {
+	border-left: 0px;
+}
+
+
+
+.div-login form {
+	float: none;
+	width: 100%;
+	margin: auto;
+}
+
+.div-login .col-sm-8-login {
+	width: 100%;
+}
+.div-login .a-forget {
+	text-align: center;
+	width: 100%;
+}
+.reg_btn_l {
+	float: left;
+}
+.reg_btn_r {
+	float: right;
+}
+
+.div-login .input-login-vcode {
+	width: 66%;
+}
+.div-login .img-login-vcode {
+	padding-left: 12px;
+	width: 30%;
+}
+.div-login .button-login {
+	width: 100%;
+	margin: auto;
+}
+
+.div-login .form-control {
+	border-radius: 0px;
+}
+
+.div-reg {
+	width: 680px;
+	background: #F6F9FF;
+	/*height: 600px;*/
+}
+.div-reg .col-lg-3-reg {
+	width: 26%;
+	text-align: right;
+}
+.div-reg .col-lg-5-reg {
+	width: 48%;
+}
+.div-reg .col-lg-4-reg {
+	width: 26%;
+}
+.div-reg .vcode-reg {
+	width: 31%;
+}
+.div-reg button#tijiao,.div-reg button#chongzhi {
+	width: 21%;
+	text-align: center;
+	margin: auto;
+}
+.div-reg button#tijiao {
+	margin-right: 8px;
+}
+.button-reg {
+	text-align: center;
+}
+
+.other_login a {
+	text-decoration:none;
+}
+.other_login h2 {
+	text-align: center;
+	margin: 0px;
+	padding: 20px;
+	font-size: 20px;
+}

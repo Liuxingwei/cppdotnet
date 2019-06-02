@@ -1,0 +1,45 @@
+.content_order {
+    border: 1px solid #DCDCDC;
+    padding: 20px;
+    padding-top: 0px;
+    box-shadow: 5px 5px 10px #ddd;
+}
+.content_order .div_row {
+    margin: 0px;
+    padding: 20px;
+    border-bottom: 1px solid #DCDCDC;
+}
+.content_order .div_row_first {
+    padding: 0px 0px 20px 0px;
+}
+.content_order .div_row_last {
+    height: 60px;
+    margin: 0;
+    padding: 25px 10px;
+}
+.text_head {
+    display: inline-block;
+    font-size: 24px;
+    background: #00baff;
+    padding: 10px 30px;
+    color: #FFF;
+}
+.text_l {
+    font-weight: bold;
+    width: 30%;
+    display: inline-block;
+}
+.text_descrp {
+    padding: 20px;
+    line-height: 36px;
+    border: 1px solid #DCDCDC;
+}
+.amount {
+    font-size: 22px;
+    font-weight: bold;
+    color: blue;
+    vertical-align: middle;
+}
+.div_row input{
+	border: 0;
+}

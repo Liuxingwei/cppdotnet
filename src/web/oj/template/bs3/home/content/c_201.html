@@ -1,0 +1,75 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>1、C语言第一个简单实例</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />在信息化、智能化的世界里，可能很早很早 我们就听过许多IT类的名词，C语言也在其中，我们侃侃而谈，到底C程序是什么样子？让我们先看简单的一个例子:
+<pre class="brush:c++;">#include&ltstdio.h> 				/*引入头文件*/
+int main(void)					/*一个简单的C程序*/
+{
+	int number;				/*定义个名字叫做number的变量*/
+	number=2014;				/*给number赋一个值*/
+	printf("Hello ! I am dotcpp.com\n");	/*调用printf()函数*/
+	printf("This year is %d\n",number);	
+	return 0;
+}</pre>
+<br />这个简单的程序作用是向屏幕上输出两句话，如果想看到实际的运行结果的话，我们需要使用编译器编译这段代码然后运行最后的可执行程序，如果顺利话，将看到运行结果为：
+<br />
+<pre class="brush:c++;">Hello ! I am dotcpp.com
+<br />This year is 2014</pre>
+<br />怎么样？一切如我们所预料吧？ 
+<br />可是...为什么...
+<br />也许您还有很多个疑问，很多个为什么，比如什么头文件、main、int、\n、%d都是什么东西？都是干什么用的？
+<br />以及您可能感觉为什么写的这么奇怪？
+<br />不用着急~ 好，让我们一起先来大致看一遍。
+<br />
+<br /><pre class="brush:c++;">#include&ltstdio.h>  /* 包含另一个文件 */ </pre>
+本行代码将告诉编译器引入一个stdio.h的文件(就像我们电脑中的123.txt一样)的全部内容。stdio.h文件是所有C语言编译器的标准部分，用来提供输入和输出的支持。
+<br />
+<br /><pre class="brush:c++;">int main(void) /*主函数*/</pre>
+C程序规定一个程序中有一个或多个函数，他们是C程序的基本模块。但必须有且只有一个main函数。因为C程序的执行将从main函数开始，到main函数结束而停止。
+<br />再回头看看我们的这个简单实例吧，他只有一个名为main的函数,名字后面的圆括号()表明main()是一个函数的名字,括号里面的void表示空的，这里指不接受任何参数。而前面的int表示main()这个函数在执行完成后返回一个整数(int表示整数,即英文integer的缩写)。有关更详细的知识，我们会在后面进入更深入的讲解。而此时，我们只需要把int和void看作是用来定义main()函数的标准即可。
+<br />
+<br /><pre class="brush:c++;">/*一个简单的C程序*/ </pre>
+这不是代码，是一句注释，符号/*和*/中包含的话不被编译器编译处理，而是给我们看的，帮助我们理解程序，你可以认为是笔记~
+<br />
+<br /><pre class="brush:c++;">{ </pre>
+这个开始花括号标志着函数的开始，而后面的结束花括号}则标志着函数的结束。
+<br />
+<br /><pre class="brush:c++;">int number； </pre>
+这个语句表明告诉编译器，我们将使用一个叫做number的变量，并且它是int(整数)类型。
+<br />
+<br /><pre class="brush:c++;">number=2014；</pre>
+这条语句表示，给number这个变量赋值为2014。
+<br />
+<br /><pre class="brush:c++;">printf("Hello ! I am dotcpp.com\n");	</pre>
+这是一个函数调用语句，在屏幕上显示“Hello ! I am dotcpp.com”，\n表示让光标另起一行。这里的printf()是C标准库里的一部分。用术语来讲，它是一个函数。在一个程序中使用另一个函数(如我们在main()函数当中调用了printf()函数)，术语称之为调用了一个函数。
+<br />
+<br /><pre class="brush:c++;">printf("This year is %d\n",number);	</pre>
+又是一个函数调用语句。但不同的是并不是输出“This years is %d”换行，而是输出"This year is 2014"换行,此刻的%d表示输出number值的位置和形式。
+<br />
+<br /><pre class="brush:c++;">return 0;</pre>
+C函数可以给它的使用者提供或返回一个数值。此时 我们只需理解这一句是用来满足C标准的要求而已。
+<br />
+<br /><pre class="brush:c++;">}</pre>
+结束的花括号，函数名后{ 和 }之间的部分称之为函数体。
+<br />
+<br />好的，这就是我们的第一个简单的C程序以及其简单的介绍，希望大家好好理解并消化，更详细的讲解我们将会在下节展开！
+</body>
+</html>

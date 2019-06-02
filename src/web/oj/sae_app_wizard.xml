@@ -1,0 +1,32 @@
+<appwizard>
+<introduction>
+<name>DOTCPP在线裁判系统SAE版</name>
+<author>zhttty</author>
+<icon>image/logo.png</icon>
+<homepage>http://www.baidu.com</homepage>
+<description>
+<![CDATA[
+    DOTCPP
+         ]]>
+</description>
+</introduction>
+<platform>
+<services>
+<service name="web"  params="public">Storage</service>
+<service name="data"  params="private">Storage</service>
+<service>Mysql</service>
+<service size="30M">Memcache</service>
+</services>
+<appconfig>
+<tpl>
+<![CDATA[
+name: <<appname>>
+version: <<version>>
+             ]]>
+</tpl>
+</appconfig>
+</platform>
+<code>
+<initScript>sae/install.php</initScript>
+</code>
+</appwizard>

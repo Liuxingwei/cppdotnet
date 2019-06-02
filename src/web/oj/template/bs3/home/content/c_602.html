@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>2、选择结构</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />
+<br />if else选择程序结构用于判断给定的条件，根据判断条件的成立与否来控制程序的流程。选择结构有单选择、双选择和多选择3种形式
+单选择结构用if语句实现:
+<br />
+<br />
+<h4>形式一：</h4>
+<br />if(表达式)  	/*若条件成立则实行花括号里的语句，反之则不执行*/
+<br />{ 
+<br />		语句
+<br />}
+<br />
+<br />
+<h4>形式二：</h4>
+<br />if(表达式) 	 /*若表达式成立则执行语句1，否则执行语句2*/
+<br />{
+<br />		语句1
+<br />}
+<br />else
+<br />{
+<br />		语句2
+<br />}
+<br />
+<br />
+<h4>形式三：</h4>
+<br />if(表达式)  	/*如果表达式成立，执行语句1否则继续判断表达式2*/
+<br />{
+<br />	语句1
+<br />} 
+<br />else if(表达式2)	/*如果表达式成立，执行语句2否则继续判断表达式3*/
+<br />{
+<br />	语句2
+<br />}
+<br />else if(表达式3)	/*如果表达式成立，则执行语句3否则继续判断下一个表达式*/
+<br />{
+<br />	语句3;
+<br />}
+<br />… …
+<br />else		 /*如果以上表达式都不成立 则执行语句4*/
+<br />{
+<br />	语句4
+<br />}
+<br />例子：
+<pre class="brush:c++;">if(flag>=90)
+{
+	printf("Good\n");
+}
+else if(flag>=60)
+{
+	printf("passed");
+}
+else
+{
+	printf("failed\n");
+}</pre>
+<br />多分支选择结构除了else if之外，C语言还提供了switch的结构。
+<br />switch语句的执行过程为：首先计算表达式的值，然后依次与常量表达式依次进行比较，若表达式的值与某常量表达式相等，则从该常量表达式处开始执行，直到switch语句结束。若所有的常量表达式的值均不等于表达式的值，则从default处开始执行。
+<br />
+<br />
+<br />switch(表达式) 	/*首先计算表达式的值*/
+<br />{
+<br />case 常量表达式1:语句1; 
+<br />case 常量表达式2:语句2;
+<br />case 常量表达式3:语句3;
+<br />… …
+<br />case 常量表达式n:语句n;
+<br />default:语句n+1；
+<br />}
+<br />例子：
+<br /><pre class="brush:c++;">switch(value)
+{
+	case 1:printf("one");break;
+	case 2:printf("two");break;
+	case 3:printf("three");break;
+	default:printf("other");break;
+}</pre>
+<br />建议您亲自上机实验，以加深对C语法的理解，并配合竞技场中的题目予以练习，熟练掌握之后在进行下面的学习。
+
+	
+</body>
+</html>

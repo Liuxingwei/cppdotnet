@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>1.变量与常量数据</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />在程序的世界中，可以让计算机按照指令做很多事情，如进行数值计算、图像显示、语音对话、视频播放、天文计算、发送邮件、游戏绘图以及任何我们可以想象到的事情。要完成这些任务，程序需要使用数据，即承载信息的数字与字符。
+<br />在计算机中,数据的性质和表示方式可能不同。所以需要将相同性质的数据归类,并用一定数据类型描述。任何数据对用户都呈现常量和变量两种形式。常量是指程序在运行时其值不能改变的量。常量不占内存,在程序运行时它作为操作对象直接出现在运算器的各种寄存器中。变量是指在程序运行时其值可以改变的量。变量的功能就是存储数据。
+例子：
+<br /><pre class="brush:c++;">#include&ltstdio.h>
+int main()
+{
+	int year；
+	year=2014；
+	printf("Welcome to www.dotcpp.com！\n");
+	return 0；
+}</pre>
+<br />其中year是一个int类型的变量，而2014是常量，即一个数字。
+<br />
+<br />变量的定义：
+<br />在程序中使用的变量名、函数名、标号等统称为标识符。除库函数的函数名由系统定义外，其余都由用户自定义。
+<br />C规定，标识符只能是字母(A～Z，a～z)、数字(0～9)、下划线(_)组成的字符串，并且其第一个字符必须是字母或下划线。且不能与C语言的关键字重名(关键字见下一节)。
+<br />
+<br />此外，在使用标识符时还必须注意以下几点：  
+<br />　　(1)标准C不限制标识符的长度，但它受各种版本的C 语言编译系统限制，同时也受到具体机器的限制。例如在某版本C 中规定标识符前八位有效，当两个标识符前八位相同时，则被认为是同一个标识符。  
+<br />　　(2)在标识符中，大小写是有区别的。例如CLANG和Clang 是两个不同的标识符。  
+<br />　　(3)标识符虽然可由程序员随意定义，但标识符是用于标识某个量的符号。因此，命名应尽量有相应的意义，以便阅读理解，做到“顾名思义”。
+
+	
+</body>
+</html>

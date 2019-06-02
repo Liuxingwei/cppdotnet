@@ -1,0 +1,23 @@
+
+/*内容*/
+.content{ width:100%; height:auto; margin:0 auto; margin-top:25px;}
+.class_content .step .step_top ul { padding: 0;margin: 0; list-style:none;}
+/*class_content*/
+.class_content{ width:100%; height:auto; border-top:1px dashed #d5d5d5; padding:35px 0; }
+.class_content .step{ width:100%; height:auto; overflow:hidden; background:#FFF;}
+.class_content .step .step_top{ width:100%; overflow:hidden; height:45px; border-bottom:1px solid #FFF; float:left;}
+.class_content .step .step_top li{ width:33.3%; height:45px; background:#FFF; border-right:1px solid #ddd; float:left; font-size:16px; color:#606060; line-height:45px; text-align:center;}
+.class_content .step .step_top li.on{ background:#1D84FF; color:#FFFFFF;}
+/*.class_content .step .left{ width:105px; height:45px; cursor: pointer; background:url(images/icon.gif) no-repeat 0 -320px; float:left; margin-top:118px;}
+.class_content .step .left:hover{ background:url(images/icon.gif) no-repeat 0 -365px; }
+.class_content .step .right{ width:105px; height:45px; cursor: pointer; background:url(images/icon.gif) no-repeat 0 -410px; float:left; margin-top:118px;}
+.class_content .step .right:hover{ background:url(images/icon.gif) no-repeat 0 -455px; }*/
+
+.class_content .step .step_content{ position:relative; width:100%; height:600px; float:left; margin-top:22px; overflow:hidden;}
+.class_content .step .step_content .ctbig{ position:absolute; width:2349px; min-height:450px;}
+.class_content .step .step_content .ctbig>div{ width:783px; min-height:450px; overflow:hidden; float:left; }
+
+/*.class_content .step .step_content .ctbig div a{ padding-left:40px; background:url(images/icon.gif) 0 -500px no-repeat; height:30px; display:inline-block; color:#d92114; margin:5px 0;}*/
+/*.class_content .step .step_content .ctbig div a u{ width:178px; height:30px; line-height:30px; display:inline-block; text-align:center; background:url(images/icon.gif) 0 -570px no-repeat; }*/
+/*.class_content .step .step_content .ctbig div.step2{background: #FFF; no-repeat;  }
+.class_content .step .step_content .ctbig div.step3{background: #FFF; no-repeat;  }*/

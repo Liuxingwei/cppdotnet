@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>3、字符数组和字符串</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />用来存放字符的数组称为字符数组。字符数组的各个元素依次存放字符串的各字符,字符数组的数组
+名代表该数组的首地址,这为处理字符串中个别字符和引用整个字符串提供了极大的方便。
+字符数组的定义形式与前面介绍的数值数组相同。例如:
+<br /><pre class="brush:c++;">char c[10];</pre>
+<br />字符数组也允许在定义时进行初始化赋值。例如:
+<br /><pre class="brush:c++;">char c[6]={'c', ' h ', 'i', 'n', 'a' , '\0' };</pre>
+<br />对字符数组的各个元素逐个赋值后,各元素的值为:
+<br /><pre class="brush:c++;">c[0]= 'c',c[1]= 'h',c[2]= 'i',c[3]= 'n',c[4]= 'a',c[5]= '\0';</pre>
+<br />其中,‘\0’为字符串结束符。如果不对 c[5]赋任何值,‘\0’会由系统自动添加。
+<br />字符数组也可采用字符串常量的赋值方式,例如:
+<br /><pre class="brush:c++;">char a[]={"china"};</pre>
+<br />
+<br />
+
+	
+</body>
+</html>

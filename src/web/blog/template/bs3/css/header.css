@@ -1,0 +1,98 @@
+.toptip{ 
+	margin: auto;
+    width:1140px; 
+    height:40px; 
+    line-height:40px; 
+    overflow:hidden; 
+    background:transparent; 
+    background-image:url(../img/volume.png);background-repeat:no-repeat;background-position:15px 50%;
+} 
+.toptip li{ 
+	margin-left: 2px;
+	list-style-type: none;
+    font-size: 16px;
+    height:40px; 
+    line-height: 40px;
+} 
+
+#nav-hd{
+    height:52px;
+    min-width: 1226px;
+    background-color:#262835;
+    border:0px;
+    border-radius:0px;
+}
+#nav-hd>ul.nav{
+    position:relative;
+    left:0;
+    display:block;
+    margin:0 auto;
+    font-size:16px;
+    width:1226px;
+}
+#nav-hd>ul.nav>li{
+    float:left;
+    margin-right:1px;
+    display:block;
+    min-width: 75px;
+    /*width:auto;*/
+}
+#nav-hd>ul.nav>li a{
+    color:white;
+    padding:16px 20px;
+    height:52px;
+    line-height: 20px;
+}
+#nav-hd a:visited,
+#nav-hd a:hover,
+.current_page_item{
+    background-color:#3061FD;
+    text-decoration:none;
+}
+#nav-hd ul{
+    padding:0px;
+
+}
+#nav-hd .sub-menu{
+    min-width:130px;
+    max-height:0px;
+    left:0px;
+    position:absolute;
+    top:100%;
+    z-index:0;
+    display:none;
+}
+
+#nav-hd .sub-menu li{
+    list-style:none;
+    background-color:#262835;
+    min-width:130px;
+    height:40px;
+    line-height:40px;
+    z-index:999;
+
+}
+#nav-hd .sub-menu li:visited,
+#nav-hd .sub-menu li:hover{
+    background-color:#3061FD;
+}
+#nav-hd .sub-menu li a:hover{
+    background-color:transparent;
+}
+#nav-hd>ul.nav>li.nav_li_right{
+    float:right;
+}
+#nav-hd>ul.nav>li.nav_li_right>ul>li{
+    list-style:none;
+    float:left;
+    height:52px;
+}
+#nav-hd>ul.nav>li.nav_li_right>ul>li>a{
+    height:52px;
+    line-height:52px;
+}
+
+.menu-item-has-children{
+    position:relative;
+    z-index:999;
+}

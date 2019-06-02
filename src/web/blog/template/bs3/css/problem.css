@@ -1,0 +1,97 @@
+.lgreen{
+      background-color: #4CAF50;
+      color:white;
+}
+#banner{
+      background-color: #f3f3f5;
+      margin-top:-5px;
+}
+#body{
+      margin-top:20px;
+}
+/*#header{*/
+      /*margin-bottom:0px;*/
+/*}*/
+div.pie_panel{
+      box-shadow:2px 2px 5px #ddd;
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-bottom:30px;
+}
+div.pie_panel p.pie_panel_head{
+      /*background-color:#6b9ed5;*/
+      background-color:#3061FD;
+      line-height:30px;
+      height:30px;
+      color:white;
+}
+#editor{
+      /*position:absolute;*/
+      /*top:0px;*/
+      /*left:0px;*/
+      height:300px;
+      margin-top:10px;
+      border:1px solid #ddd;
+      margin-bottom:10px;
+}
+/*#tijiao {
+  height: 36px;
+}*/
+pre.sampledata{
+    background-color:transparent;
+    border:0px;
+}
+span.color_block{
+    width:16px;
+    height:16px;
+    display:inline-block;
+}
+.chart {
+  position: relative;
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.chart canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.percent {
+  display: inline-block;
+  line-height: 150px;
+  z-index: 2;
+}
+.percent:after {
+  content: '%';
+  margin-left: 0.1em;
+  font-size: .8em;
+}
+table#result_ajax {
+  width: 30%;
+  float: left;
+}
+table#result_ajax td {
+  line-height: 45px;
+}
+.button_pro_sub {
+  line-height: 45px;
+}
+.mod_select a {
+  display: block;
+  line-height: 40px;
+  font-size: 15px;
+  border-top: 1px solid #DDD;
+  padding: 0px 35px;
+  width: 100%;
+}
+.mod_select a,.mod_select a:hover,.mod_select a:visited,.mod_select a:link {
+  color: #333;
+  text-decoration: none;
+}
+.mod_select a:hover {
+  background: #F5F5F5;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+        <link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+        <script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+        <script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+        <script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+        <script language='javascript'>
+        SyntaxHighlighter.config.bloggerMode = false;
+        SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+        SyntaxHighlighter.defaults['toolbar'] = false;
+        SyntaxHighlighter.all();
+        </script>
+</head>
+<body>
+<h3>4、使用typedef定义类型</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />在 C 语言中,除系统定义的标准类型和用户自定义的结构体、共用体等类型之外,还可以使用类型说
+明语句 typedef 定义新的类型来代替已有的类型。typedef 语句的一般形式是:
+<br />typedef 已定义的类型 新的类型;
+<br />例如:
+<br /><pre class="brush:c++;">typedef int INTEGER; /*指定用 INTEGER 代表 int 类型*/
+typedef float REAL; /*指定用 REAL 代表 float 类型*/</pre>
+<br />在具有上述 typedef 语句的程序中,下列语句就是等价的:
+<br /><pre class="brush:c++;">int i, j; /*与 INTEGER i, j;*/
+float pi; /*与 REAL pi;*/</pre>
+<br />当然typedef的最常用的作用就是给结构体变量重命名。
+<pre class="brush:c++;">#include&ltstdio.h>
+#include&ltstring.h>
+typedef struct _INFO
+{
+        int num;
+        char str[256];
+}INFO;
+int main()
+{
+        struct _INFO A;
+        INFO B;    //通过typedef重命名后的名字INFO与struct _INFO完全等价！
+        A.num = 2014;
+        strcpy(A.str,"Welcome to dotcpp.com");
+        B=A;
+        printf("This year is %d %s\n",A.num,A.str);
+        printf("This year is %d %s\n",B.num,B.str);
+        return 0;
+}</pre>
+
+</body>
+</html>

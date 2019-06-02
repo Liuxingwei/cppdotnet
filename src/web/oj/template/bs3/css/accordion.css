@@ -1,0 +1,76 @@
+
+.list_dl {
+    width: 100%;
+}
+.list_dt{
+    background: #FFF;
+    color: #333;
+    width: 100%;
+    padding: 0 40px 0 20px;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    border-bottom: 1px solid #DDD;
+    border-top: 1px solid #DDD;
+    font-size: 15px;
+}
+/*.list_dt:hover{
+    background: #4DA4FF;
+}*/
+.list_dt:hover ._after{
+    display: block;
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #1D84FF;
+}
+#open{
+    background: #FFF;
+}
+#open ._after{
+    display: block;
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #1D84FF;
+}
+.list_dt_icon{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url("../img/off.png") no-repeat;
+}
+#open .list_dt_icon{
+    background: url("../img/open.png") no-repeat;
+}
+.list_dd{
+    display: none;
+}
+.list_li{  
+    list-style-type: none;
+    /*border-bottom: 1px solid #4DA4FF;
+    border-left: 1px solid #4DA4FF;*/
+}
+.list_li>a{
+    display: block;
+    text-decoration: none;
+    background: #FFF;
+    color: #999;
+    width: 100%;
+    line-height: 40px;
+}
+
+/*.list_li>a:hover{
+    background: #4DA4FF;
+}*/

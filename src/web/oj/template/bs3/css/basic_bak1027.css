@@ -1,0 +1,179 @@
+html,body{
+    height:100%;
+}
+body{
+	font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.wrap{
+    min-height:100%;
+    padding-bottom:80px;
+    /*background-color:#E9EAEC;*/
+}
+/*#header_nav>li{
+    	margin-right:15px;
+		margin-left:15px;
+}
+#header_nav>li.active>a{
+	/*background-color:#4CAF50;
+	color:red;
+	color:#3061FD;
+	/*background-color:transparent;
+}
+#header{
+	background-color:#262835;
+	border-radius:0px;
+}*/
+#footer{
+	background-color:#262835;
+	color:#bbb;
+	height:80px;
+    position:relative;
+    width:100%;
+    margin-top:-80px;
+}
+#footer p, #footer ul{
+	padding-top:40px;
+}
+#footer ul li a{
+	color:#888;
+}
+#footer ul li a:hover{
+	color:white;
+}
+.light_blue{
+	background-color:#3061FD;
+	color:white;
+}
+.btn-primary{
+	background-color:#3061FD;
+	color:white;     
+	border:0px;
+}
+.btn-primary:hover{
+	background-color:#337AB6;
+}
+.btn-light_green{
+	background-color:#79EB5A;
+	color:white;
+}
+.btn-light_green:hover{
+	color:white;
+	border-color:#19B91D;
+	background-color:#79BB5A;
+}
+
+.light_green{
+	background-color:#46ED19;
+	color:white;
+}
+.btn-light_purple{
+	background-color:#9B33A1;
+	color:white;
+}
+.btn-light_purple:hover{
+	background-color:#9B3388;
+	color:white;
+}
+.btn-unknow_color{
+	background-color:#5F3BB9;
+	color:white;
+}
+.btn-unknow_color:hover{
+	background-color:#5F3B99;
+	color:white;
+}
+.btn-pink{
+	background-color:#EF80D3;
+	color:white;
+}
+.btn-pink:hover{
+	background-color:#EF66D3;
+	color:white;
+}
+#profile_drop_out>li>a{
+	padding-top:8px;
+}
+#nav-header{
+	height:52px;
+	background-color:#262835;
+	border:0px;
+	border-radius:0px;
+}
+#nav-header>ul.nav{
+	position:relative;
+	left:0;
+	display:block;
+	margin:0 auto;
+	font-size:16px;
+	max-width:1226px;
+}
+#nav-header>ul.nav>li{
+	float:left;
+	margin-right:1px;
+	display:block;
+	min-width: 75px;
+	/*width:auto;*/
+}
+#nav-header>ul.nav>li a{
+	color:white;
+	padding:16px 20px;
+	height:52px;
+}
+#nav-header a:hover, .current_page_item{
+	background-color:#3061dd;
+	text-decoration:none;
+}
+#nav-header .sub-menu{
+	min-width:130px;
+	left:0px;
+	max-height:0px;
+	position:absolute;
+	top:100%;
+	z-index:0;
+	display:none;
+}
+#nav-header ul{
+	padding:0px;
+	/*margin-top:auto;*/
+}
+#nav-header .sub-menu li{
+	list-style:none;
+	background-color:#3060fb;
+	min-width:130px;
+	height:40px;
+	line-height:40px;
+	z-index:999;
+	/*visibility:hidden;*/
+}
+#nav-header .sub-menu li:hover{
+	background-color:#576663;
+}
+#nav-header .sub-menu li a:hover{
+	background-color:transparent;
+}
+#nav-header>ul.nav>li.nav_li_right{
+	float:right;
+}
+#nav-header>ul.nav>li.nav_li_right>ul>li{
+	list-style:none;
+	float:left;
+	height:52px;
+}
+#nav-header>ul.nav>li.nav_li_right>ul>li>a{
+	height:52px;
+	line-height:52px;
+}
+.menu-item-has-children{
+	position:relative;
+	z-index:999;
+}
+table.table-striped tr.evenrow{
+	background-color:#E5ECF9;
+}
+table.table-striped tr.oddrow{
+	background-color:white;
+}
+.toprow{
+	background-color:#1D84FF;
+	color:white;
+}

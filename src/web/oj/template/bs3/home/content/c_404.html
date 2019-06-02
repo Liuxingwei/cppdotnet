@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>4、格式化输入函数scanf</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />
+<br />scanf函数称为格式输入函数，即按照格式字符串的格式，从键盘上把数据输入到指定的变量之中。Scanf函数的调用的一般形式为：
+<br />scanf(“格式控制字符串”，输入项地址列表);
+	<br />其中，格式控制字符串的作用与printf函数相同，但不能显示非格式字符串，也就是不能显示提示字符串。地址表项中的地址给出各变量的地址，地址是由地址运算符”&”后跟变量名组成的。
+<br />Scanf   函数中格式字符串的构成与printf函数基本相同，但使用时有几点不同.
+<br />(1) 格式说明符中，可以指定数据的宽度，但不能指定数据的精度。例：
+<br /><pre class="brush:c++;">float a；
+scanf(“%10f”，&a);  //正确
+scanf(“%10.2f”,&a); //错误 </pre>
+<br />(2) 输入long类型数据时必须使用%ld，输入double数据必须使用%lf或%le。
+<br />(3) 附加格式说明符”*”使对应的输入数据不赋给相应的变量。
+<br /><br />
+<br />scanf()函数所用的转换说明符与printf()所用的几乎完全相同。主要区别在于printf()把%f、%e、%E、%g、%G同时用于float类型和double类型，而scanf()只是把他们用于float类型，而用于double类型时要求使用l(字母l)修饰符。
+<div class='row table-responsive'>
+	<div class="col-md-12"> <!-- col-md-? 范围1~12 改变表格宽度 ；col-md-offset- 左偏移量 1~12 -->
+	<table class="table table-striped table-hover table-condensed" style="background-color:#ffffff;color:black;text-align:center">
+	<!-- 
+		class里 利用 table-striped 可以给<tbody>之内的每一样增加斑马条纹样式。
+			利用 table-bordered为表格和其中的每个单元格增加边框。
+			利用 table-hover可以让<tbody>中的每一行响应鼠标悬停状态。
+			利用 table-condensed可以让表格更加紧凑，单元格中的内部（padding）均会减半。
+		以上属性可累加使用；
+		text-align: 设置文字位置 center 居中 left 靠左 right 靠右-->
+		<thead style="background-color:#1d84ff;color:#ffffff">
+			<tr>
+				<td><b>转换说明符</b></td>
+				<td><b></b></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>%c</td>		
+				<td>把输入解释成一个字符</td>		
+			</tr>
+			<tr>
+				<td>%d</td>
+				<td>把输入解释成一个有符号十进制整数</td>
+			</tr>
+			<tr>
+				<td>%e,%f,%g,%a</td>
+				<td>把输入解释成一个浮点数(%a是C99的标准)</td>
+			</tr>
+			<tr>
+				<td>%E,%F,%G,%A</td> 		
+				<td>把输入解释成一个浮点数(%A是C99的标准)</td> 	
+			</tr>
+			<tr>
+				<td>%i</td> 	
+				<td>把输入解释成一个有符号十进制整数</td>	
+			</tr>
+			<tr>
+				<td>%o</td>	 
+				<td>把输入解释成一个有符号的八进制整数</td>
+			</tr>
+			<tr>
+				<td>%p</td>	
+				<td>把输入解释成一个指针(一个地址)</td> 	
+			</tr>
+			<tr>
+				<td>%s</td>	 
+				<td>把输入解释成一个字符串：输入的内容以第一个非空白字符作为开始，并且包含直到下一个空白字符的全部字符</td>
+			</tr>
+			<tr>
+				<td>%u</td>	
+				<td>把输入解释成一个无符号十进制整数</td> 	
+			</tr>
+			<tr>
+				<td>%x,%X</td>	
+				<td>把输入解释称一个有符号十六进制整数</td> 	
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br />
+<br />
+<h4>*修饰符在scanf中()的用法：</h4>
+<br />*在scanf()中提供截然不同的服务，当把它放在%和说明符字母之间时，它使函数跳过相应的输入项目。请参考程序事例：
+<pre class="brush:c++;">/*用*跳过scanf接收的数字*/
+#include&ltstdio.h>
+int main(void)
+{
+        int num;
+        printf("Please enter three number:\n");
+        scanf("%*d %*d %d",&num);
+        printf("The last number is %d\n",num);
+        return 0;
+}</pre>
+<br />gcc下运行结果如下：
+<pre class="brush:c++;">Please enter three number:
+2014 2015 2016
+The last number is 2016</pre>
+<br />
+<br />
+<h4>关于scanf()的返回值</h4>
+<br />scanf() 函数返回成功读入的项目的个数。如果它没有读取任何项目(比如它期望接收一个数字而您却输入的一个非数字字符时就会发生这种情况),scanf()返回0。
+<br />当它检测到“文件末尾”(end of file)时，它返回EOF(EOF在是文件stdio.h中的定义好的一个特殊值，一般，#define指令将EOF的值定义为-1)。当您学过循环之后，或在参加ACM这样的比赛及使用在线评测系统的时候会经常用到这种写法。
+
+	
+</body>
+</html>

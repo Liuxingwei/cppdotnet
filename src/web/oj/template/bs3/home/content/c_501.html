@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>1.基本运算符</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />C使用运算符(operator)来代表算术运算。例如，+运算符可以使它两侧的值加在一起。如果您觉得术语“运算符”听起来比较奇怪，那么请您记住那些东西总得有个名称。与其被称之为“那些东西”或“数学符号”，被称之为“运算符”似乎看起来更专业一些！ 现在，除此之外，让我们再看一下其他的基本运算符
+<br />
+<br />
+<h4>赋值运算符</h4>
+<br />在C里，符号=不表示“相等”，而是一个赋值运算符。下面的语句是将2014赋给num的变量。
+<br />num=2014;
+<br />也就是说，符号=的左边是一个变量名，右边是赋给该变量的值。符号=被称为赋值运算符(assignment operator)。再次强调不要把这行代码读做“num等于2014”，而应该读为“将值2014赋给变量num”。赋值运算符的动作是从右到左。
+<br />或许变量的名字和变量值之间的区别看起来微乎其微，但是请考虑下面的常量计算机语句：
+<br />i=i+1;
+<br />在数学上，该语句没有任何意义。如果您给一个有限的数加1，结果不会“等于”这个数本身。它意味着“找到名字为i的变量的值：然后对那个值加1，然后将这个新值赋给名字为i的变量”。
+<br />像下面的这条语句：
+<br />2014=num；
+<br />在C中是没有意义的(确切的说是无效的)，原因是2014只是一个常量。您不能将一个值赋给一个常量；那个常量本身就是它的值了。所以，当您准备键入代码时请记住在符号=左边的项目必须是一个变量的名字。实际上，赋值运算符左边必须指向一个存储位置。最简单的方法是使用变量的名字，但是以后您会看到，“指针”也可以指向一个存储位置。更普遍地，C使用术语“可修改的左值”(modifiable Ivalue)来标志那些我们可以为之赋值的实体。“可修改的左值”或许不是那么直观易懂，所以我们先看看一些定义。
+<br />
+<br />
+<h4>几个术语：数据对象、左值、右值和操作数</h4>
+<br />“数据对象“(data object)是泛指数据存储区的术语，数据存储区能用于保存值。例如，用于保存变量或数组的数据存储区是一个数据对象。C的术语左值(lvalue)指用于标识一个特定的数据对象的名字或表达式。例如，变量的名字是一个左值。所以对象指的是实际的数据存储，但是左值是用于识别或定位那个存储的标识符。
+<br />因为不是所有的对象都是可更改值的，所以C使用术语”可修改的左值“来表示那些可以被更改的对象。所以，赋值运算符的左值应该是一个可修改的左值。lvalue中的l确实是英文单词left的意思，因为可修改的左值可以用在赋值运算符的左边。
+<br />术语"右值"(rvalue)指的是能赋给可修改的左值的量。例如，考虑下面的语句：
+<br />num=2014；
+<br />这里是一个可修改的左值，2014是一个右值。您可能猜到rvalue中的r表示right。右值可以是常量、变量或者任何可以产生一个值的表达式。
+<br />我们可以把变量理解为一个容器，放在左边当左值时，意思为保存、存放右边的值。所以，我们可以说=运算符的左操作数是可修改的左值。
+<br />
+<br />
+<h4>数学运算符</h4>
+<br />主要包括：
+<br />单目运算符：只需要一个操作数
+<br />
+<br />自增：++     自减： --
+<br />双目运算符：需要两个操作数
+<br />
+<br />加法：+    	 减法：-  	乘法： *  	   除法：  /   		 求模：%
+<br />增量和减量运算符： ++和--
+<br />“增量运算符”(increment operator)完成简单的任务，即将其操作数的值增加1。这个运算符以两种方式出现。在第一种方式中，++出现在它作用的变量的前面，这是前缀(prefix)模式.在第二种方式中，++出现在它作用的变量的后面，这是后缀(postfix)模式。这两种模式的区别在于值的增加这一动作发生的准确时间不同。对于前缀运算符，先执行自增或自减运算，再计算表达式的值，而后缀运算符，则先计算表达式的值，再执行自增或自减运算。
+<br />我们通过例子来说明：
+<br />
+<pre class="brush:c++;">#include&ltstdio.h>
+int main()
+{
+        int a,b;
+        a=b=5;
+        printf("%d      %d\n",a--,--b);
+        printf("%d      %d\n",a--,--b);
+        printf("%d      %d\n",a--,--b);
+        printf("%d      %d\n",a--,--b);
+        printf("%d      %d\n",a--,--b);
+        return 0;
+}</pre>  
+运行结果如下：
+<br /><pre class="brush:c++;">5      4
+4      3
+3      2
+2      1
+1      0</pre>
+<br />这个程序5次将变量a和b减1，您可以通过这个结果来理解前缀和后缀的区别。
+<br />需要提醒一下的是，++与--是单目运算符，即一个操作对象，而这个操作对象只能为变量，因为，常量不可以被赋值。
+<br />
+<br />
+<div class='row table-responsive'>
+	<div class="col-md-12"> <!-- col-md-? 范围1~12 改变表格宽度 ；col-md-offset- 左偏移量 1~12 -->
+	<table class="table table-striped table-hover table-condensed" style="background-color:#ffffff;color:black;text-align:center">
+	<!-- 
+		class里 利用 table-striped 可以给<tbody>之内的每一样增加斑马条纹样式。
+			利用 table-bordered为表格和其中的每个单元格增加边框。
+			利用 table-hover可以让<tbody>中的每一行响应鼠标悬停状态。
+			利用 table-condensed可以让表格更加紧凑，单元格中的内部（padding）均会减半。
+		以上属性可累加使用；
+		text-align: 设置文字位置 center 居中 left 靠左 right 靠右-->
+		<thead style="background-color:#1d84ff;color:#ffffff">
+			<tr>
+				<td><b>运算符</b></td>		
+				<td><b>符号</b></td>	
+				<td><b>操作</b></td>	
+				<td><b>用例</b></td>
+				<td><b>结果</b></td>	
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>加法</td>
+				<td>+</td>
+				<td>使它两侧的值加到一起</td>
+				<td>1+2</td>
+				<td>3</td>	
+			</tr>
+			<tr>
+				<td>减法</td>
+				<td>-</td>
+				<td>从它前面的数减去后面的数</td>
+				<td>5-3</td>
+				<td>2</td>	
+			</tr>
+			<tr>
+				<td>乘法</td>
+				<td>*</td>
+				<td>将它前面的数乘以后面的数</td>
+				<td>2*3</td>
+				<td>6</td>	
+			</tr>
+			<tr>
+				<td>除法</td>
+				<td>/</td>
+				<td>用它左边的值除以右边的值</td>
+				<td>8/3</td>
+				<td>2(整数的除法会丢掉小数部分)</td>	
+			</tr>
+			<tr>
+				<td>取模</td>
+				<td>%</td>
+				<td>求用它左边的值除以右边的数后的余数</td>
+				<td>5%3</td>
+				<td>2(%运算符两侧的操作数必须为整数)</td>	
+			</tr>	
+		</tbody>
+	</table>
+</div>
+<br />看一个例子：
+<br />
+<pre class="brush:c++;">#include&ltstdio.h>
+int main()
+{
+        int a=20;
+        int b=5;
+        int c=6;
+        printf("a = %d b = %d c = %d\n",a,b,c);
+        printf("a + b = %d\n",a+b);
+        printf("a - c = %d\n",a-c);
+        printf("a * b = %d\n",a*b);
+        printf("a / c = %d\n",a/c);
+        printf("a %% c = %d\n",a%c);/*两个%才会输出一个%*/
+        return 0;
+}</div>
+<br />运行结果为：
+<br /><pre class="brush:c++;">a = 20 b = 5 c = 6
+a + b = 25
+a - c = 14
+a * b = 100
+a / c = 3
+a % c = 2</pre>
+<br />
+<br />请大家亲自实验。
+	
+</body>
+</html>

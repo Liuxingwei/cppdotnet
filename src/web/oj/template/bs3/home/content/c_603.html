@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href='/oj/highlight/styles/shCore.css' rel='stylesheet' type='text/css'/>
+	<link href='/oj/highlight/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/>
+	<script src='/oj/highlight/scripts/shCore.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCpp.js' type='text/javascript'></script>
+	<script src='/oj/highlight/scripts/shBrushCss.js' type='text/javascript'></script>
+	<script language='javascript'>
+	SyntaxHighlighter.config.bloggerMode = false;
+	SyntaxHighlighter.config.clipboardSwf = '/oj/highlight/scripts/clipboard.swf';
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+	</script>
+</head>
+<body>
+<h3>3、循环结构</h3> <!-- 每一节的标题 -->
+<br /> <!-- 换行符 <br />  在页面想换行用<br /> -->
+<br />
+<br />C语言提供三种循环结构，分别为while循环,do while循环和for循环。其一般式如下:
+<br />
+<br />while语句
+<br />总体注解：
+<br />while语句创建一个循环,该循环在判断表达式为假(或0)之前重复执行。while语句是一个入口条件(entry-condition)循环，在进行一次循环之前决定是否要执行循环。因此有可能一次也不执行。循环的语句部分可以是一个简单语句或一个复合的语句。
+<br />while(表达式)
+<br />{
+<br />	  循环体语句
+<br />}
+<br />在表达式为假(或0)之前重复执行statement部分。
+<br />例子
+<br /><pre class="brush:c++;">while(i++&lt10)
+{
+	printf(“count %d ”,i);
+}</pre>
+<br />do while 语句
+<br />总体注解：
+<br />do while语句创建一个循环，它在判断表达式为假(或0)之前重复执行。do while语句是一个退出条件循环，在执行一次循环之后才决定是否要再次执行循环，因此循环至少要被执行一次。循环的语句部分可以是一个简单的语句或一个复合语句。
+<br />形式
+<br />do  
+<br />{
+<br />	  循环体语句
+<br />}while(表达式);
+<br />在表达式为假(或0)之前重复执行循环体语句
+<br />例子
+<br /><pre class="brush:c++;">do
+{
+	printf("count %d"，i);
+}while(i&lt20);</pre>
+<br />for语句
+<br />总体注释：
+<br />for语句使用由分号隔开的三个控制表达式来控制循环过程。初始化表达式只在开始执行循环语句之前执行一次。如果判断表达式为真(或非0)就执行一次循环。然后计算更新表达式并再次检查判断表达式的值。for语句是一个入口条件循环，在进行一次循环之前决定是否要执行循环，因此有可能循环一次也不执行。循环的语句部分可以是一个简单的语句或一个复合语句。
+<br />形式
+<br />for(初始化表达式;判断表达式;更新表达式)
+<br />{
+<br />	  循环体语句
+<br />}
+<br />循环在判断表达式为假(或0)之前重复执行。
+<br />例子
+<pre class="brush:c++;">for(i=0;i&lt100;i++)
+{
+	printf("i count is %d\n",i);
+}</pre>
+
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+/*解决ueditor代码高亮显示与bootstrap类冲突*/
+.syntaxhighlighter td.code .container:before {display: none;}
+
+.wrap {
+  background: #E9EAEC;
+}
+.content_box {
+  border-radius: 0px;
+  background: #FFF;
+  border: 0px;
+  box-shadow: 0 1px 6px #ccc;
+}
+.content_r {
+  padding: 30px;
+  border-bottom: 1px solid #DDD;
+}
+.content_l .left_menu {
+  list-style-type: none;
+  margin: 0px;
+  padding-left: 0px;
+}
+.list_dt {
+  line-height: 45px;
+  padding: 0px 15px;
+  border-bottom: 1px solid #DDD;
+  border-top: 1px solid #DDD;
+}
+.list_li a {
+  color: #999;
+  display: inline-block;
+  width: 100%;
+  line-height: 35px;
+  padding-left: 30px;
+}
+.list_li a.selected {
+  color: #4071FD;
+  border-right: 3px solid #4071FD;
+}
+.list_li a:hover,.list_li a:active,.list_li a:visited,.list_li a:focus {
+  text-decoration: none;
+}

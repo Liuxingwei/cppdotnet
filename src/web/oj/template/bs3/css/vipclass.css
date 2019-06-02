@@ -1,0 +1,63 @@
+.wrap {
+    background: #E9EAEC;
+}
+.content_box {
+    border: 0px solid #DDD;
+    border-radius: 3px;
+    background: #FFF;
+    box-shadow: 0 1px 6px #ccc;
+}
+.content_l {
+    background: transparent;
+    /*border-right: 1px solid #DDD;*/
+}
+.content_r{
+    border-radius: 0px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+dd.open {
+    display: block;
+}
+/*左侧栏样式*/
+/*.nav-pills>li>a {
+	color: #666;
+}
+.nav>li>a:hover, .nav>li>a:visited, .nav>li>a:active {
+    background: #F5F5F5;
+}
+.nav-pills>li>a {
+    border-bottom: 1px solid #DCDCDC;
+    border-top: 0px;
+}*/
+ul.left_menu {
+    margin: 0px;
+    padding: 0px;
+}
+ul.left_menu>li>a {
+    padding-left: 30px;
+}
+ul.left_menu>li>a.selected {
+	font-weight: bolder;
+	color: #1D84FF;
+	border-right: 3px solid #1D84FF;
+}
+/*.class_bg {
+     background-image: url(/oj/template/bs3/img/vipstudy_bg.jpg);
+}*/
+.class_head {
+    height: 50px;
+    background-image: url(/oj/template/bs3/img/vipstudy_head_01.png);
+}
+.class_descrp {
+    font-size: 16px;
+    line-height: 35px;
+    color: #666;
+    padding: 10px 30px;
+    border: 1px solid #DDD;
+    min-height: 450px;
+}
+a.rlink {
+    text-decoration: none;
+    color: #999;
+}

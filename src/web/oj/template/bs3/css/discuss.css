@@ -1,0 +1,35 @@
+.discuss_msg{
+	min-height:220px;
+	border-bottom:1px solid #E0E0E0;
+	position:relative;
+	padding-top:10px;
+}
+.bottom_right{
+	position:absolute;
+	right:5px;
+	bottom:5px;
+}
+.user_sign{
+	color:#A7A7A7;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width:300px;
+}
+pre{
+    background-color:transparent;
+    border:0px;
+}
+span.reply_to_user{
+	position:absolute;
+	left:0;
+	top:0;
+	display:none;
+	height:34px;
+	line-height:1.42857143;
+	padding:6px 20px;
+}
+.dis_content {
+	margin-bottom: 60px;
+	float: none;
+}

@@ -1,0 +1,56 @@
+/*滑动验证码*/
+.verify-bar-area {
+    position: relative;
+    background: #FFFFFF;
+    text-align: center;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    margin: auto;
+}
+ 
+
+
+.verify-img-panel {
+  margin:0;
+  -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  position: relative;
+  margin: auto;
+}
+
+.verify-img-panel .verify-refresh {
+  width: 25px;
+  height: 25px;
+  text-align:center;
+  padding: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+/*字体图标的css*/
+
+
+.iconfont {
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*.icon-check:before { content: "\e645"; }
+
+.icon-close:before { content: "\e646"; }
+
+.icon-right:before { content: "\e6a3"; }
+
+.icon-refresh:before { content: "\e6a4"; }
+*/

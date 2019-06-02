@@ -1,0 +1,103 @@
+html,body{
+    height:100%;
+}
+.wrap{
+    min-height:100%;
+    padding-bottom:80px;
+}
+#header_nav>li{
+    	margin-right:15px;
+		margin-left:15px;
+}
+#header_nav>li.active>a{
+	/*background-color:#4CAF50;*/
+	/*color:red;*/
+	color:#3061FD;
+	/*background-color:transparent;*/
+}
+#header{
+	background-color:#262835;
+	border-radius:0px;
+}
+#body{
+	width:100%;
+	float:left;
+}
+
+#chatroom{
+	float:right;
+	width:35%;
+	height:760px;
+	background-color:pink;
+}
+
+#footer{
+	background-color:#262835;
+	color:#bbb;
+	height:80px;
+    	position:relative;
+    	width:100%;
+    	margin-top:-80px;
+}
+#footer p, #footer ul{
+	padding-top:40px;
+}
+#footer ul li a{
+	color:#888;
+}
+#footer ul li a:hover{
+	color:white;
+}
+.light_blue{
+	background-color:#3061FD;
+	color:white;
+}
+.btn-primary{
+	background-color:#3061FD;
+	color:white;     
+	border:0px;
+}
+.btn-primary:hover{
+	background-color:#337AB6;
+}
+.btn-light_green{
+	background-color:#46ED19;
+	color:white;
+}
+.btn-light_green:hover{
+	color:white;
+	border-color:#19B91D;
+	background-color:#46CC19;
+}
+
+.light_green{
+	background-color:#46ED19;
+	color:white;
+}
+.btn-light_purple{
+	background-color:#890092;
+	color:white;
+}
+.btn-light_purple:hover{
+	background-color:#660092;
+	color:white;
+}
+.btn-unknow_color{
+	background-color:#5F3BB9;
+	color:white;
+}
+.btn-unknow_color:hover{
+	background-color:#5F3B99;
+	color:white;
+}
+.btn-pink{
+	background-color:#f3c;
+	color:white;
+}
+.btn-pink:hover{
+	background-color:#f2c;
+	color:white;
+}
+#profile_drop_out>li>a{
+	padding-top:8px;
+}

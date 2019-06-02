@@ -1,0 +1,51 @@
+ul.tutorial{
+	padding-left:0px;
+	float:left;
+	width:23%;
+	color:#666;
+	font-size:16px;
+	border-right:1px solid #bbb;
+}
+ul.tutorial li{
+	list-style-type:none;
+	color:#333;
+	height:40px;
+	line-height:40px;
+}
+ul.tutorial li.active{
+	background: -webkit-linear-gradient(left, rgba(48, 97, 253, 1), rgba(48, 97, 253, 0)) !important;
+	background: -o-linear-gradient(left, rgba(48, 97, 253, 1), rgba(48, 97, 253, 0)) !important;
+	background: linear-gradient(to right, rgba(48, 97, 253, 1), rgba(48, 97, 253, 0)) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=rgba(48, 97, 253, 1),endColorstr=rgba(48, 97, 253, 0),GradientType=0);
+	color:white !important;
+}
+ul.tutorial li.active a{
+	color:white;
+}
+ul.tutorial li:hover{
+	background-color:#eee;
+	cursor:pointer;
+}
+ul.tutorial li a{
+	color:#333;
+	width:100%;
+	height:100%;
+	display:block;
+}
+ul.tutorial li a:hover{
+	color:#333;
+	text-decoration:none;
+}
+ul.tutorial>li:nth-child(1){
+	padding-left:1em;
+}
+li.tutorial_item1{
+	padding-left:1em;
+}
+li.tutorial_item2{
+	padding-left:2em;
+}
+div#class_content{
+	width:75%;
+	float:right;
+}
