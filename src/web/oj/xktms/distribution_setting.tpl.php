@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>分镜设定</title>
+    <title>分销设定</title>
     <link rel=stylesheet href='../include/hoj.css' type='text/css'>
+    <style>
+        body {
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
 <?php
@@ -56,10 +61,167 @@ endif;
         </div>
     </div>
 </div>
+<?php
+if ($distribution->getIfNeedSpecialTop() == 1) :
+?>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h3>一级分销商：</h3>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <table class="table table-bordered table-striped table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>用户id</th>
+                <th>用户昵称</th>
+                <th>电话</th>
+                <th>邮箱</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach($users as $user):
+            ?>
+                <tr>
+                    <td><?=$user['user_id']?></td>
+                    <td><?=$user['nick']?></td>
+                    <td><?=$user['phone']?></td>
+                    <td><?=$user['email']?></td>
+                    <td><?=$user['reg_time']?></td>
+                    <td>
+                        <?php
+                        if ($user['state'] == 1) :
+                        ?>
+                        <a class="deny_link" href="javascript:void(0)" data-id="<?=$user['user_id']?>">禁用</a>
+                        <?php
+                        else :
+                        ?>
+                        <a class="allow_link" href="javascript:void(0)" data-id="<?=$user['user_id']?>">启用</a>
+                        <?php
+                        endif;
+                        ?>
+                        <a class="delete_link" href="javascript:void(0)" data-id="<?=$user['user_id']?>">删除</a>
+                    </td>
+                </tr>
+            <?php
+            endforeach;
+            ?>
+            </tbody>
+        </table>
+        <?=$db->pageFregment()?>
+    </div>
+</div>
+<form id="deny_form" method="post">
+    <input type="hidden" name="deny_post" value="1">
+    <input type="hidden" name="user_id">
+</form>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <a href="javascript:void(0)" class="btn btn-primary" id="append_switch">添加一级分销</a>
+        </div>
+    </div>
+    <div class="row<?=!isset($_GET['append'])? ' hide' : ''?>">
+        <div class="span12">
+            <form method="get" class="form-inline" id="search_candidates" name="search_candidates">
+                <input type="text" placeholder="请输入用户id" name="c_user_id" value="<?=$_GET['c_user_id']?>">
+                <?php
+                foreach ($_GET as $key => $get) :
+                    if ('c_user_id' != $key) :
+                ?>
+                    <input type="hidden" name="<?=$key?>" value="<?=$get?>">
+                <?php
+                    endif;
+                endforeach;
+                ?>
+                <button class="btn btn-primary">查找</button>
+            </form>
+        </div>
+    </div>
+    <div class="row<?=!isset($_GET['append'])? ' hide' : ''?>">
+        <table class="table table-bordered table-striped table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>用户id</th>
+                <th>用户昵称</th>
+                <th>电话</th>
+                <th>邮箱</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach($candidates as $candidate):
+                ?>
+                <tr>
+                    <td><?=$candidate['user_id']?></td>
+                    <td><?=$candidate['nick']?></td>
+                    <td><?=$candidate['phone']?></td>
+                    <td><?=$candidate['email']?></td>
+                    <td><?=$candidate['reg_time']?></td>
+                    <td><a class="append_link" href="javascript:void(0)" data-id="<?=$candidate['user_id']?>">添加</a></td>
+                </tr>
+            <?php
+            endforeach;
+            ?>
+            </tbody>
+        </table>
+        <?=$candidateDb->pageFregment()?>
+    </div>
+</div>
+<form id="append_form" method="post">
+    <input type="hidden" name="append_post" value="1">
+    <input type="hidden" name="user_id">
+</form>
+<?php
+endif;
+?>
 <script src="../template/bs3/js/jquery.min.js"></script>
 <script>
     $(function () {
         $('#state_alert').fadeOut(3000);
+        $('.deny_link').click(function () {
+            $('#deny_form input[name="deny_post"]').val(1);
+            $('#deny_form input[name="user_id"]').val($(this).data('id'));
+            $('#deny_form').submit();
+        });
+        $('.allow_link').click(function () {
+            $('#deny_form input[name="deny_post"]').val(3);
+            $('#deny_form input[name="user_id"]').val($(this).data('id'));
+            $('#deny_form').submit();
+        });
+        $('.delete_link').click(function () {
+            $('#deny_form input[name="deny_post"]').val(2);
+            $('#deny_form input[name="user_id"]').val($(this).data('id'));
+            $('#deny_form').submit();
+        });
+        $('.append_link').click(function () {
+            $('#append_form input[name="user_id"]').val($(this).data('id'));
+            $('#append_form').submit();
+        });
+        $('#append_switch').click(function () {
+            var url = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            var search = window.location.search;
+            search = search.replace(/&{0,1}append=[^&]+/g, '');
+            if ('?' == search) {
+                search += 'append=true';
+            } else if ('' == search) {
+                search = '?append=true'
+            } else {
+                search += '&append=true';
+            }
+            url += search;
+            window.location.href = url;
+        });
+        $('#search_candidates').submit(function () {
+            $(this).attr('action', window.location.href);
+        })
     })
 </script>
 </body>

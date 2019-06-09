@@ -21,14 +21,21 @@ class Distribution
      */
     private $optionsFile = __DIR__ . '/distributions.json';
 
+    private $urls;
+
     /**
      * 初始化数据库访问链接、初始化数据库访问链接、分销配置
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->mysqli = $GLOBALS['mysqli'];
         $this->initOptions();
+        $this->urls = array(
+            'c' => 'http://' . $_SERVER['HTTP_HOST'] . '/c',
+            'cpp' => 'http://' . $_SERVER['HTTP_HOST'] . '/cpp',
+            'suanfa' => 'http://' . $_SERVER['HTTP_HOST'] . '/suanfa',
+        );
     }
-
 
 
     /**
@@ -36,12 +43,13 @@ class Distribution
      * @param $userId
      * @return boolean 有权限返回 true，无权限返回 false;
      */
-    public function checkPermission ($userId) {
+    public function checkPermission($userId)
+    {
         if ($this->getIfNeedVip()) {
             $result = $this->mysqli->query("SELECT * FROM users WHERE user_id = '" + $userId + "'");
             $row = $result->fetch_assoc();
             $now = time();
-            if (strtotime($row['vip_end']) < $now || strtotime($row['vip_end_cpp']) < $now ||strtotime($row['vip_end_suanfa']) < $now) {
+            if (strtotime($row['vip_end']) < $now || strtotime($row['vip_end_cpp']) < $now || strtotime($row['vip_end_suanfa']) < $now) {
                 return false;
             }
         }
@@ -50,7 +58,25 @@ class Distribution
                 return false;
             }
         }
+        if ($this->getState($userId) == 0) {
+            return false;
+        }
         return true;
+    }
+
+    /**
+     * 获取用户状态
+     * @param $userId
+     * @return int|object
+     */
+    public function getState($userId)
+    {
+        $result = $this->mysqli->query("SELECT state FROM promotion_code WHERE user_id = '" + $userId + "'");
+        if (0 == $result->num_rows) {
+            return 1;
+        }
+        $state = $result->fetch_field();
+        return $state;
     }
 
     /**
@@ -58,7 +84,8 @@ class Distribution
      * @param $userId
      * @return int|object
      */
-    public function getLevel($userId) {
+    public function getLevel($userId)
+    {
         $result = $this->mysqli->query("SELECT level FROM promotion_code WHERE user_id = '" + $userId + "'");
         if (0 == $result->num_rows) {
             return 0;
@@ -71,7 +98,8 @@ class Distribution
      * 设置是否需要VIP才可以分销
      * @param $need boolean
      */
-    public function setIfNeedVip($need) {
+    public function setIfNeedVip($need)
+    {
         $this->options['if_need_vip'] = $need;
         $this->saveOptions();
     }
@@ -80,14 +108,16 @@ class Distribution
      * 获取是否需要VIP才可以分销
      * @return boolean
      */
-    public function getIfNeedVip() {
+    public function getIfNeedVip()
+    {
         return isset($this->options['if_need_vip']) ? $this->options['if_need_vip'] : 0;
     }
 
     /**
      * 保存分销配置
      */
-    private function saveOptions() {
+    private function saveOptions()
+    {
         $content = json_encode($this->options);
         file_put_contents($this->optionsFile, $content);
     }
@@ -104,7 +134,8 @@ class Distribution
     /**
      * 初始化分销配置项变量
      */
-    private function initOptions() {
+    private function initOptions()
+    {
         if (file_exists($this->optionsFile)) {
             $content = file_get_contents($this->optionsFile);
             $this->options = json_decode($content, true);
@@ -117,7 +148,8 @@ class Distribution
      * 设置分销最大级数，如果为0，为不限制级数
      * @param $maxLevel
      */
-    public function setMaxLevel($maxLevel) {
+    public function setMaxLevel($maxLevel)
+    {
         $this->options['max_level'] = $maxLevel;
         $this->saveOptions();
     }
@@ -126,7 +158,8 @@ class Distribution
      * 获取分销最大级数
      * @return maxLevel
      */
-    public function getMaxLevel() {
+    public function getMaxLevel()
+    {
         return isset($this->options['max_level']) ? $this->options['max_level'] : 0;
     }
 
@@ -134,7 +167,8 @@ class Distribution
      * 设置分销结算（返利）方案）
      * @param $rebateScheme
      */
-    public function setRebateScheme($rebateScheme) {
+    public function setRebateScheme($rebateScheme)
+    {
         $this->options['rebate_scheme'] = $rebateScheme;
         $this->saveOptions();
     }
@@ -143,7 +177,8 @@ class Distribution
      * 获取分销结算（返利）方案
      * @return rebate_scheme
      */
-    public function getRebateScheme() {
+    public function getRebateScheme()
+    {
         return isset($this->options['rebate_scheme']) ? $this->options['rebate_scheme'] : 0;
     }
 
@@ -151,7 +186,8 @@ class Distribution
      * 设置是否需要指定顶级分销商
      * @param $maxLevel
      */
-    public function setIfNeedSpecialTop($need) {
+    public function setIfNeedSpecialTop($need)
+    {
         $this->options['if_need_special_top'] = $need;
         $this->saveOptions();
     }
@@ -160,7 +196,8 @@ class Distribution
      * 获取分销最大级数
      * @return if_need_special_top
      */
-    public function getIfNeedSpecialTop() {
+    public function getIfNeedSpecialTop()
+    {
         return isset($this->options['if_need_special_top']) ? $this->options['if_need_special_top'] : 0;
     }
 
@@ -168,12 +205,14 @@ class Distribution
      * 设置分销返利比例
      * @param $rebateRatio
      */
-    public function setRebateRatio($rebateRatio) {
+    public function setRebateRatio($rebateRatio)
+    {
         $this->options['rebate_ratio'] = $rebateRatio;
         $this->saveOptions();
     }
 
-    public function getRebateRatio() {
+    public function getRebateRatio()
+    {
         return isset($this->options['rebate_ratio']) ? $this->options['rebate_ratio'] : 0;
     }
 
@@ -182,14 +221,94 @@ class Distribution
      * @param $userId
      * @return string
      */
-    function generatePromotionCode($userId) {
+    function generatePromotionCode($userId)
+    {
         $md5 = md5($userId, true);
         $candidateChar = '0123456789ABCDEFGHIJKLMNOPQRSTUV';
         $promotionCode = '';
-        for($position = 0; $position < 8; $position++) {
+        for ($position = 0; $position < 8; $position++) {
             $front = ord($md5[$position]);
             $promotionCode .= $candidateChar[($front ^ ord($md5[$position + 8])) - $front & 0x1F];
         }
+        return $promotionCode;
+    }
+
+    public function sentPromotionCodeToSession()
+    {
+        $ptcodeDb = new DB();
+        $ptcodeDb->table('promotion_code');
+        $ptcodeDb->where('promotion_code = ? AND state = 1', array('promotion_code' => $_GET['ptcode']));
+        $ptcode = $ptcodeDb->selectOne();
+        if ($ptcode) {
+            $_SESSION['promotion_code'] = $ptcode['promotion_code'];
+        }
+    }
+
+    public function getPromotionCode($userId, $subject)
+    {
+        $db = new DB();
+        $db->table('promotion_code');
+        $db->where('user_id = ? AND subject = ?', array('user_id' => $userId, 'subject' => $subject));
+        $row = $db->selectOne();
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function createPromotionUrl($promotionCode, $subject)
+    {
+        $url = $this->urls[$subject] . '?ptcode=' . $promotionCode;
+        return $url;
+    }
+
+    public function getParentPromotion($promotionCode, $subject)
+    {
+        $db = new DB();
+        $db->table('promotion_code');
+        $db->where('promotion_code = ? AND subject = ?', array('promotion_id' => $promotionCode, 'subject' => $subject));
+        $row = $db->selectOne();
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function getEmptyPromotion($userId) {
+        $db = new DB();
+        $db->table('promotion_code');
+        $db->where('user_id = ? AND promotion_code IS NULL', array('user_id' => $userId));
+        $row = $db->selectOne();
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateEmptyPromotion($userId, $subject) {
+        $db = new DB();
+        $promotionCode = $this->generatePromotionCode($userId);
+        $db->table('promotion_code');
+        $db->where('user_id = ? AND promotion_code IS NULL', array('user_id' => $userId));
+        $db->update(array('promotion_code' => $promotionCode, 'subject' => $subject));
+        return $promotionCode;
+    }
+
+    public function appendPromotion($userId, $parentPromotionCode, $subject, $level) {
+        $db = new DB();
+        $db->table('promotion_code');
+        $promotionCode = $this->generatePromotionCode($userId);
+        $db->insert(array(
+            'user_id' => $userId,
+            'promotion_code' => $promotionCode,
+            'parent_code' => $parentPromotionCode,
+            'subject' => $subject,
+            'level' => $level,
+            'create_time' => date('Y-m-d H:i:s')
+        ));
         return $promotionCode;
     }
 

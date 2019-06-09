@@ -306,9 +306,9 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             <div style="min-width: 1170px;background: #5a83ff;margin-top: 70px;margin-bottom: 70px;box-shadow: 0px 0px 10px 1px #CCC;">
                 <table id="tab_class_sub">
                     <tr>
-                        <td><div class="radio_class1 radio_class">C语言课程</div><div style="margin-bottom: 20px;"><a href="/vipmb/order_check/" class="btn_kaitong">开通</a></div></td>
-                        <td><div class="radio_class2 radio_class">C++课程</div><div style="margin-bottom: 20px;"><a href="/vipmb/order_check/" class="btn_kaitong">开通</a></div></td>
-                        <td><div class="radio_class3 radio_class">算法课程</div><div style="margin-bottom: 20px;"><a href="/vipmb/order_check/" class="btn_kaitong">开通</a></div></td>
+                        <td><div class="radio_class1 radio_class">C语言课程</div><div style="margin-bottom: 20px;"><a href="/vipmb/order_check/<?=isset($_GET['ptcode'])?'?ptcode='.$_GET['ptcode']:''?>" class="btn_kaitong">开通</a></div></td>
+                        <td><div class="radio_class2 radio_class">C++课程</div><div style="margin-bottom: 20px;"><a href="/vipmb/order_check/<?=isset($_GET['ptcode'])?'?ptcode='.$_GET['ptcode']:''?>" class="btn_kaitong">开通</a></div></td>
+                        <td><div class="radio_class3 radio_class">算法课程</div><div style="margin-bottom: 20px;"><a href="/vipmb/order_check/<?=isset($_GET['ptcode'])?'?ptcode='.$_GET['ptcode']:''?>" class="btn_kaitong">开通</a></div></td>
                     </tr>
                 </table>
                 <div class="ctn_class1 ctn_class">

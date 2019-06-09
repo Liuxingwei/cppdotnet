@@ -126,7 +126,7 @@ $user_id=$_SESSION['user_id'];
                 </form>
 
                 <form id="payol" name="payorder_check" action="/vipmb/order_create/" method="post">
-
+                <input type="hidden" name="promotion_code" value="<?=isset($_GET['ptcode'])?$_GET['ptcode']:''?>">
                 <div class="div_row">
                     <span class="text_l">购买单价：</span>
                     <!-- <del style="color: #999;">原价￥199/月</del>　　　　 -->
