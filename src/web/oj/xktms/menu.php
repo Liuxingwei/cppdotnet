@@ -120,6 +120,12 @@ if (isset($_SESSION['administrator'])) {
     <li>
         <a class='btn btn-primary' href="distribution_setting.php" target="main"><b>分销设定</b></a>
     </li>
+<?php }
+if (isset($_SESSION['administrator'])) {
+?>
+    <li>
+        <a class='btn btn-primary' href="distribution_statistics.php" target="main"><b>分销排行</b></a>
+    </li>
 <?php
 }
 if (isset($OJ_ONLINE)&&$OJ_ONLINE && isset($_SESSION['administrator'])){

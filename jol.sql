@@ -964,6 +964,78 @@ ALTER TABLE `vipclass_problem`
   ADD CONSTRAINT `vipclass_problem_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `vipclass` (`class_id`);
 COMMIT;
 
+-- 分销科目与商品关联表
+DROP TABLE IF EXISTS `goods_subject`;
+CREATE TABLE `goods_subject` (
+                                 `goods_id` int(10) DEFAULT NULL COMMENT '商品id',
+                                 `subject` varchar(32) DEFAULT NULL COMMENT '科目',
+                                 KEY `goods_id` (`goods_id`),
+                                 KEY `subject` (`subject`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of goods_subject
+-- ----------------------------
+BEGIN;
+INSERT INTO `goods_subject` VALUES (100101, 'c');
+INSERT INTO `goods_subject` VALUES (100103, 'c');
+INSERT INTO `goods_subject` VALUES (100106, 'c');
+INSERT INTO `goods_subject` VALUES (100112, 'c');
+INSERT INTO `goods_subject` VALUES (200101, 'cpp');
+INSERT INTO `goods_subject` VALUES (200103, 'cpp');
+INSERT INTO `goods_subject` VALUES (200106, 'cpp');
+INSERT INTO `goods_subject` VALUES (200112, 'cpp');
+INSERT INTO `goods_subject` VALUES (300101, 'suanfa');
+INSERT INTO `goods_subject` VALUES (300103, 'suanfa');
+INSERT INTO `goods_subject` VALUES (300106, 'suanfa');
+INSERT INTO `goods_subject` VALUES (300112, 'suanfa');
+COMMIT;
+
+
+-- 推广码表
+DROP TABLE IF EXISTS `promotion_code`;
+CREATE TABLE `promotion_code` (
+                                  `user_id` varchar(48) NOT NULL COMMENT '用户id',
+                                  `promotion_code` varchar(8) DEFAULT NULL COMMENT '推广码',
+                                  `parent_code` varchar(8) DEFAULT NULL COMMENT '上级推广码',
+                                  `level` int(11) unsigned NOT NULL DEFAULT '1' COMMENT '分销xekl',
+                                  `create_time` datetime NOT NULL COMMENT '创建时间',
+                                  `subject` varchar(32) DEFAULT NULL COMMENT '推广科目',
+                                  `state` tinyint(255) unsigned DEFAULT '1' COMMENT '状态，1为正常，0为禁用',
+                                  KEY `promotion_code` (`promotion_code`),
+                                  KEY `create_tim` (`create_time`),
+                                  KEY `parent_id` (`parent_code`) USING BTREE,
+                                  KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- 分销收入表
+DROP TABLE IF EXISTS `distribution_amount`;
+CREATE TABLE `distribution_amount` (
+                                       `id` bigint(20) NOT NULL AUTO_INCREMENT,
+                                       `user_id` varchar(48) DEFAULT NULL COMMENT '分销用户',
+                                       `order_id` varchar(20) DEFAULT NULL COMMENT '商品id',
+                                       `order_amount` int(11) DEFAULT NULL COMMENT '订单金额',
+                                       `amount` int(11) DEFAULT NULL COMMENT '分销收入',
+                                       `pay_user_id` varchar(48) DEFAULT NULL COMMENT '下单用户',
+                                       `distribution_level` tinyint(4) DEFAULT NULL COMMENT '分销级别',
+                                       `goods_id` int(10) DEFAULT NULL COMMENT '课程商品id',
+                                       `settle_state` tinyint(4) DEFAULT '0' COMMENT '结算状态，0为未结算，1为已结算',
+                                       `order_time` datetime NOT NULL COMMENT '下单时间',
+                                       `settle_time` datetime DEFAULT NULL COMMENT '结算时间',
+                                       PRIMARY KEY (`id`),
+                                       KEY `user_id` (`user_id`),
+                                       KEY `order_id` (`order_id`),
+                                       KEY `pay_user_id` (`pay_user_id`),
+                                       KEY `settle_state` (`settle_state`),
+                                       KEY `order_time` (`order_time`),
+                                       KEY `settle_time` (`settle_time`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- 用户添加支付宝信息
+ALTER TABLE `jol`.`users`
+    ADD COLUMN `alipay_account` varchar(40) NULL COMMENT '支付宝账号' AFTER `vipclass_unlock`,
+    ADD COLUMN `alipay_user` varchar(40) NULL COMMENT '支付宝用户名' AFTER `alipay_account`;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

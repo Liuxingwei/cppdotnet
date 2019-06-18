@@ -133,6 +133,9 @@ $user_id=$_SESSION['user_id'];
                     <span style="font-weight: bold;color: #666">C语言：￥89/月　　　C++：￥139/月　　　算法课程：￥189/月</span>
                 </div>
                 <div class="div_row">
+                    <?php
+                    if (isset($_GET['subject']) && 'c' == $_GET['subject']) :
+                    ?>
                     <div><span class="text_l">C语言课程：</span></div>
                     <!-- <div class="radio radio_selected">
                         <label>
@@ -155,59 +158,36 @@ $user_id=$_SESSION['user_id'];
                         </label>
                     </div> -->
 
-                    <div class="radio radio_selected">
-                        <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="c-1m" checked>C语言课程1个月<span class="radio_amount">￥89</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="c-6m">C语言课程6个月　(7折)<span class="radio_amount">￥379</span>
-                        </label>
-                    </div>
+
                     <div class="radio">
                         <img class="img_tuijian" src="/oj/template/<?php echo $OJ_TEMPLATE; ?>/img/tuijian.gif">
                         <label>
                             <input style="display:none;" type="radio" name="vip_size" value="c-12m">C语言课程12个月　(5折)<span class="radio_amount">￥539</span>
                         </label>
                     </div>
-
+                    <?php
+                    elseif (isset($_GET['subject']) && 'cpp' == $_GET['subject']) :
+                    ?>
                     <div><span class="text_l">C++课程：</span></div>
-                    <div class="radio">
-                        <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="cpp-1m">C++课程1个月<span class="radio_amount">￥139</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="cpp-6m">C++课程6个月　(7折)<span class="radio_amount">￥589</span>
-                        </label>
-                    </div>
                     <div class="radio">
                         <img class="img_tuijian" src="/oj/template/<?php echo $OJ_TEMPLATE; ?>/img/tuijian.gif">
                         <label>
                             <input style="display:none;" type="radio" name="vip_size" value="cpp-12m">C++课程12个月　(5折)<span class="radio_amount">￥839</span>
                         </label>
                     </div>
-
+                    <?php
+                    elseif (isset($_GET['subject']) && 'suanfa' == $_GET['subject']) :
+                    ?>
                     <div><span class="text_l">算法课程：</span></div>
-                    <div class="radio">
-                        <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="suanfa-1m">算法课程1个月<span class="radio_amount">￥189</span>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="suanfa-6m">算法课程6个月　(7折)<span class="radio_amount">￥799</span>
-                        </label>
-                    </div>
                     <div class="radio">
                         <img class="img_tuijian" src="/oj/template/<?php echo $OJ_TEMPLATE; ?>/img/tuijian.gif">
                         <label>
                             <input style="display:none;" type="radio" name="vip_size" value="suanfa-12m">算法课程12个月　(5折)<span class="radio_amount">￥1139</span>
                         </label>
                     </div>
-
+                    <?php
+                    endif;
+                    ?>
                 </div>
                 <div class="div_row"><span class="text_l">购买用户：</span><?php echo $user_id; ?></div>
                 <div class="div_row_last">

@@ -117,7 +117,9 @@ if (isset($_POST['vip_size'])) {
         require("../oj/template/".$OJ_TEMPLATE."/error.php");
         exit(0);*/
     }
-
+    require_once __DIR__ . '/include/distribution.class.php';
+    $distribution = new Distribution();
+    $distribution->calaPromotionProfit($order_id, $pay_amount, $user_id, $promotion_code, $goods_id);
     header("location:/vipmb/order_pay/$order_id");
 } else {
     $view_errors = "订单错误！请重新提交！";

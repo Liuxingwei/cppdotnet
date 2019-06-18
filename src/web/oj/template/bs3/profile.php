@@ -38,6 +38,9 @@ header("Pragma: no-cache");
 		
 		return $retmsg;
 	}
+//	require_once __DIR__ . '/../../include/mysqli.php';
+	require_once __DIR__ . '/../../include/distribution.class.php';
+	$distribution = new Distribution();
 	$profile='';
 		if (isset($_SESSION['user_id'])){
 				$sid=$_SESSION['user_id'];
@@ -51,6 +54,9 @@ header("Pragma: no-cache");
 				/*$profile.= "<li><a href='".$path_fix."myvalue.php?user=$sid'><span id=red>我的竞争力</span></a></li>";*/
 				$profile.= "<li><a href='".$path_fix."resume.php?user_id=$sid'><span id=red>我的简历</span></a></li>";
 				$profile.= "<li><a href='/vipjoin/'><span id=red>VIP学习系统</span></a></li>";
+                if ($distribution->checkPermission($_SESSION['user_id'])) {
+                    $profile .= "<li><a href='" . $path_fix . "distribution.php?user_id=" . $sid . "'><span id=red>分销统计</span></a></li>";
+                }
 				$profile.= "<li><a href=".$path_fix."logout.php>$MSG_LOGOUT</a></li>";
                 $profile.="</ul></li>";
             }else if(isset($_SESSION['user_cpn'])){
@@ -68,7 +74,7 @@ header("Pragma: no-cache");
 				    $profile.= "<li><a href=".$path_fix."login_renren.php>$MSG_LOGIN(RENREN)</a></li>&nbsp;";
                 }
                 if ($OJ_QQ_AUTH){
-            $profile.= "<li><a href=".$path_fix."login_qq.php>$MSG_LOGIN(QQ)</a></li>&nbsp;";
+                    $profile.= "<li><a href=".$path_fix."login_qq.php>$MSG_LOGIN(QQ)</a></li>&nbsp;";
                 }
 				$profile.= "<li><a href=".$path_fix."loginpage.php>$MSG_LOGIN</a></li>&nbsp;";
 				if($OJ_LOGIN_MOD=="dotcpp"){

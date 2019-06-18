@@ -1,0 +1,28 @@
+## 修改的文件如下 ##
+
+- default
+   - /vipjoin/
+   - /vipmb/order_check/
+- jol.sql
+   - 科目与商品关联表（需要带初始化数据）
+   - 推广码
+   - 分销收入
+- 管理后台
+   - distribution_detail.php
+   - distribution_statistics.php
+   - distribution_statistics.tpl.php
+   - distribution_setting.php
+   - distribution_setting.tpl.php
+   - menu.php
+- 前台
+   - ajax_distribution_create.php
+   - distribution.php
+   - payorder_check.php
+   - payorder_create.php
+   - vipjoin.php
+   - template/bs3/profile.php
+   - modify.php
+   - template/bs3/modifypage.php
+- include
+   - mysqli.php
+   - distribution.class.php

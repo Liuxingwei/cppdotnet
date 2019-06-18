@@ -44,6 +44,10 @@ class DB
         return $this->mysqli;
     }
 
+    /**
+     * @param $fields string
+     * @return $this
+     */
     public function fields($fields)
     {
         $this->fields = $fields;
@@ -110,7 +114,7 @@ class DB
 
     public function update($vals)
     {
-        $this->sql = "UPDATE `" . $this->table . "` SET";
+        $this->sql = "UPDATE `" . $this->table . "` SET ";
         $replaces = array();
         $values = array();
         foreach ($vals as $field => $value) {

@@ -116,6 +116,16 @@
           <div class="col-lg-5"><input type="text" class="form-control" placeholder="用于邮寄比赛奖品" name="address" maxlength="90" value="<?php echo htmlentities($row->address,ENT_QUOTES,"UTF-8")?>"></div>
     </div>
     <div class="form-group">
+        <label for="" class="col-lg-2 control-label">支付宝账号</label>
+        <div class="col-lg-5"><input type="text" class="form-control" placeholder="输入支付宝账号" name="alipay_account" maxlength="20" value="<?=$row->alipay_account?>"></div>
+        <label for="" class="col-lg-4" id="nick_xx" style="color:orange;width: 36%;line-height: 30px;">提示:用于分销收入提现。</label>
+    </div>
+    <div class="form-group">
+        <label for="" class="col-lg-2 control-label">支付宝用户名</label>
+        <div class="col-lg-5"><input type="text" class="form-control" placeholder="输入支付宝用户名" name="alipay_user" maxlength="20" value="<?=$row->alipay_user?>"></div>
+        <label for="" class="col-lg-4" id="nick_xx" style="color:orange;width: 36%;line-height: 30px;">提示:用于分销收入提现。</label>
+    </div>
+    <div class="form-group">
           <label for="" class="col-lg-2 control-label">密码</label>
           <div class="col-lg-5"><input type="password" class="form-control" placeholder="输入当前密码" name="opassword" maxlength="20"></div>
           <label for="" class="col-lg-4" id="nick_xx" style="color:orange;width: 36%;line-height: 30px;">提示:请输入用户当前密码再保存信息.</label>

@@ -29,6 +29,8 @@ $work_field=trim($_POST['work_field']);
 $subject=trim($_POST['subject']);
 $phone=trim($_POST['phone']);
 $address=trim($_POST['address']);
+$alipay_account=trim($_POST['alipay_account']);
+$alipay_user=trim($_POST['alipay_user']);
 
 $len=strlen($nnick);
 // echo "<script>alert('nick:$nick _ $len');</script>";
@@ -98,6 +100,14 @@ if($len>180){
 	$err_str=$err_str."自我简介太长!";
 	$err_cnt++;			
 }
+if (mb_strlen($alipay_account) > 40) {
+	$err_str .= "支付宝账号太长";
+	$err_cnt++;
+}
+if (mb_strlen($alipay_user) > 40) {
+	$err_str .= "支付宝用户名太长";
+	$err_cnt++;
+}
 
 // echo "<script>console.log('$onick')</script>";
 // echo "<script>console.log('$nnick')</script>";
@@ -125,13 +135,15 @@ $school=mysqli_real_escape_string($mysqli,htmlentities ($school,ENT_QUOTES,"UTF-
 $user_sign=mysqli_real_escape_string($mysqli,htmlentities ($user_sign,ENT_QUOTES,"UTF-8"));
 $user_intro=mysqli_real_escape_string($mysqli,htmlentities ($user_intro,ENT_QUOTES,"UTF-8"));
 $is_work=mysqli_real_escape_string($mysqli,htmlentities ($is_work,ENT_QUOTES,"UTF-8"));
-$age=mysqli_real_escape_string($mysqli,htmlentities ($age,ENT_QUOTES,"UTF-8"));
+$age=mysqli_real_escape_string($mysqli,htmlentities ($age,ENT_QUOTES,"UTF-8")) ?:0;
 $work_field=mysqli_real_escape_string($mysqli,htmlentities ($work_field,ENT_QUOTES,"UTF-8"));
 $subject=mysqli_real_escape_string($mysqli,htmlentities ($subject,ENT_QUOTES,"UTF-8"));
 $email=mysqli_real_escape_string($mysqli,htmlentities ($email,ENT_QUOTES,"UTF-8"));
 $oemail=mysqli_real_escape_string($mysqli,htmlentities ($oemail,ENT_QUOTES,"UTF-8"));
 $phone=mysqli_real_escape_string($mysqli,htmlentities ($phone,ENT_QUOTES,"UTF-8"));
 $address=mysqli_real_escape_string($mysqli,htmlentities ($address,ENT_QUOTES,"UTF-8"));
+$alipay_account=mysqli_real_escape_string($mysqli,htmlentities ($alipay_account,ENT_QUOTES,"UTF-8"));
+$alipay_user=mysqli_real_escape_string($mysqli,htmlentities ($alipay_user,ENT_QUOTES,"UTF-8"));
 $sql="UPDATE `users` SET"
 	."`user_intro`='".($user_intro)."',"
 	."`user_sign`='".($user_sign)."',"
@@ -139,7 +151,9 @@ $sql="UPDATE `users` SET"
 	."`is_work`=".($is_work).","
 	."`address`='".($address)."',"
 	."`phone`='".($phone)."',"
-	."`email`='".($email)."' ";
+	."`email`='".($email)."',"
+	."`alipay_account`='" . $alipay_account . "',"
+	."`alipay_user`='" . $alipay_user . "' ";
 
 if($onick!=$nnick){
 	$sql.=" , `nick`='$nnick', `last_nick_time`=NOW()";
