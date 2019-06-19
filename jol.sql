@@ -1032,9 +1032,13 @@ CREATE TABLE `distribution_amount` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- 用户添加支付宝信息
-ALTER TABLE `jol`.`users`
+ALTER TABLE `users`
     ADD COLUMN `alipay_account` varchar(40) NULL COMMENT '支付宝账号' AFTER `vipclass_unlock`,
     ADD COLUMN `alipay_user` varchar(40) NULL COMMENT '支付宝用户名' AFTER `alipay_account`;
+
+-- 支付表添加推广码字段
+ALTER TABLE `order_vippay`
+    ADD COLUMN `promotion_code` varchar(8) NULL COMMENT '支付时使用的推广码' AFTER `descrp`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
