@@ -22,7 +22,7 @@ class Distribution
     /**
      * @var 配置文件路径
      */
-    private $optionsFile = __DIR__ . '/distributions.json';
+    private $optionsFile;
 
     private $urls;
 
@@ -31,6 +31,7 @@ class Distribution
      */
     public function __construct()
     {
+        $this->optionsFile  = __DIR__ . '/distributions.json';
         $this->mysqli = $GLOBALS['mysqli'];
         $this->initOptions();
         $this->urls = array(
