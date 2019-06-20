@@ -156,7 +156,7 @@ server {
 		rewrite ^/vipstudy_(\w+)/study/$ /oj/study.php?subject=$1 ;
 		rewrite ^/vipstudy_(\w+)/study/(\d+)$ /oj/study.php?class=$2&subject=$1 ;
 		rewrite ^/vipstudy_(\w+)/problem/?(.*)$ /oj/vipproblem.php?$2&subject=$1 ;
-		rewrite ^/vipmb/order_check/(\w*)(/\*)(\w*)$ /oj/payorder_check.php?subject=$1&ptcode=$2;
+		rewrite ^/vipmb/order_check/(\w*)(\/*)(\w*)$ /oj/payorder_check.php?subject=$1&ptcode=$2;
 		rewrite ^/vipmb/order_create/$ /oj/payorder_create.php ;
 		rewrite ^/vipmb/order_pay/(\d+)$ /oj/payorder_pay.php?oid=$1 ;
 		rewrite ^/vipmb/order_success/(.*)$ /oj/payorder_success.php$1 ;
