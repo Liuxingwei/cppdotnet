@@ -38,12 +38,13 @@ if (isset($_POST['end_date']) && !empty($_POST['end_date'])) {
 }
 $distributionDb = new DB();
 $distributionDb->table('distribution_amount');
-$distributionDb->fields('distribution_amount.*, order_vippay.goods');
+$distributionDb->fields('distribution_amount.*, order_vippay.goods, order_vippay.status');
 $distributionDb->join('inner join order_vippay on distribution_amount.order_id = order_vippay.order_id');
 $distributionDb->where($where, $params);
-$distributionDb->order('settle_state asc');
+$distributionDb->order('status asc, settle_state asc');
 $amounts = $distributionDb->select();
 
+$unpay = 0;
 $total = 0;
 $settled = 0;
 $unsettle = 0;
@@ -151,17 +152,22 @@ $distributors = $res['distributors'];
                             <th>下单时间</th>
                             <th>分销级数</th>
                             <th>结算状态</th>
+                            <th>订单状态</th>
                             <th>结算时间</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php
                     foreach($amounts as $amount) :
-                        $total += $amount['amount'];
+                        if (1 == $amount['status']) {
+                            $total += $amount['amount'];
+                        }
                         if (1 == $amount['settle_state']) {
                             $settled += $amount['amount'];
-                        } else {
+                        } elseif (1 == $amount['status']) {
                             $unsettle += $amount['amount'];
+                        } else {
+                            $unpay += $amount['amount'];
                         }
                     ?>
                         <tr>
@@ -172,6 +178,7 @@ $distributors = $res['distributors'];
                             <td><?=$amount['order_time']?></td>
                             <td><?=$amount['distribution_level']?></td>
                             <td><?=$amount['settle_state'] == 0 ? '未结算' : '已结算'?></td>
+                            <td><?=$amount['status'] == 0 ? '<span style="color: #dd514c">未付款</span>' : '已付款'?></td>
                             <td><?=$amount['settle_time']?></td>
                         </tr>
                     <?php
@@ -185,7 +192,7 @@ $distributors = $res['distributors'];
             </div>
             <div class="mod_detail">
                 <div class="div-n-1">
-                    下级分销商：<?=$distributors?>（人）&nbsp;&nbsp;&nbsp;&nbsp;总收益：<?=$total?> （元）&nbsp;&nbsp;&nbsp;&nbsp;已结算收益：<?=$settled?>（元）&nbsp;&nbsp;&nbsp;&nbsp;待结算收益：<?=$unsettle?>（元）
+                    <strong>下级分销商：</strong><?=$distributors?>（人）&nbsp;&nbsp;&nbsp;&nbsp;<strong>总收益（不包含未付款收益）：</strong><?=$total?> （元）&nbsp;&nbsp;&nbsp;&nbsp;<strong>已结算收益：</strong><?=$settled?>（元）&nbsp;&nbsp;&nbsp;&nbsp;<strong>待结算收益：</strong><?=$unsettle?>（元）&nbsp;&nbsp;&nbsp;&nbsp;<strong>未付款收益：</strong><?=$unpay?>（元）
                 </div>
             </div>
         </div>
