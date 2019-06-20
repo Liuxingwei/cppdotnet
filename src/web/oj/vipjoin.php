@@ -995,12 +995,13 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             $(".ctn_class1").attr("hidden",true);
         });
         $('.create_distribution').click(function () {
-            var url = '/oj/ajax_distribution_create.php?subject=' + <?=isset($_GET['subject']) ? $_GET['subject'] : ''?>;
+            var url = '/oj/ajax_distribution_create.php?subject=<?=isset($_GET['subject']) ? $_GET['subject'] : ''?>';
             <?php
             if (isset($_GET['ptcode'])) {
                 echo "url += '&ptcode=" . $_GET['ptcode'] . "';";
             }
             ?>
+
             $.getJSON(url, function (result) {
                 if ('0' != result.code) {
                     $('#error_create').show();
