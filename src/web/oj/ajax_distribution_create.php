@@ -10,11 +10,14 @@ $distribution = new Distribution();
 if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] =='') {
     $res = array(
         'code' => '1001',
-        'message' => '未登录',
+        'message' => '未登录，请<a href="/oj/loginpage.php">登录</a>后参与分销',
         'data' => null
     );
 } else {
     $subject = $_GET['subject'];
+    if ('' == $subject) {
+        $subject = 'null';
+    }
     if ('c' != $subject && 'cpp' != $subject && 'suanfa' != $subject) {
         if ('1001' == $subject) {
             $subject = 'c';

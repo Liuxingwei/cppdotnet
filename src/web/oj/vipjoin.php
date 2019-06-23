@@ -281,7 +281,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                 <div>
                 <p class="dscrp_1">“名师授课,大道养成”</p>
                     <?php
-                    if (!isset($_GET['subject']) || '' == $_GET['subject']) :
+                    if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject']) :
                     ?>
                 <p class="dscrp_2" style="margin-left: 50px;">　　C语言、C++课程由十年以上编程教学、竞赛、研发经验，前ACM亚洲赛退役选手，人脸识别、云计算领域资深研发工程师黄老师亲自授课。</p>
                 <p class="dscrp_2" style="margin-left: 50px;">　　算法课程由前ACM亚洲区域赛金牌退役选手郭老师亲自授课。驰骋亚洲赛多年，除了真金白银的知识干货，更有真传经验传授于你配合对应真题实时检验。</p>
@@ -304,15 +304,15 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                     } else {
                         $ptcodeStr = '';
                     }
-                    if (!isset($_GET['subject']) && '1001' == $_GET['subject']) :
+                    if (isset($_GET['subject']) && '1001' == $_GET['subject']) :
                     ?>
                     <p><a href="/vipmb/order_check/c/<?=$ptcodeStr?>" class="btn_vipjoin_head">开通续费课程</a></p>
                     <?php
-                    elseif (!isset($_GET['subject']) && '2001' == $_GET['subject']) :
+                    elseif (isset($_GET['subject']) && '2001' == $_GET['subject']) :
                     ?>
                     <p><a href="/vipmb/order_check/cpp/<?=$ptcodeStr?>" class="btn_vipjoin_head">开通续费课程</a></p>
                     <?php
-                    elseif (!isset($_GET['subject']) && '3001' == $_GET['subject']) :
+                    elseif (isset($_GET['subject']) && '3001' == $_GET['subject']) :
                     ?>
                     <p><a href="/vipmb/order_check/suanfa/<?=$ptcodeStr?>" class="btn_vipjoin_head">开通续费课程</a></p>
                     <?php
@@ -323,17 +323,17 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             </div>
             <div class="btnbox01">
                 <?php
-                if (!isset($_GET['subject']) || '' == $_GET['subject'] || '1001' == $_GET['subject']) :
+                if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '1001' == $_GET['subject']) :
                 ?>
                 <p><a href="/vipstudy_c/study/" class="btn_vipjoin btn_vipjoin01">进入C语言课程</a></p>
                 <?php
                 endif;
-                if (!isset($_GET['subject']) || '' == $_GET['subject'] || '2001' == $_GET['subject']) :
+                if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '2001' == $_GET['subject']) :
                 ?>
                 <p><a href="/vipstudy_cpp/study/" class="btn_vipjoin btn_vipjoin02">进入C++课程</a></p>
                 <?php
                 endif;
-                if (!isset($_GET['subject']) || '' == $_GET['subject'] || '3001' == $_GET['subject']) :
+                if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '3001' == $_GET['subject']) :
                 ?>
                 <p><a href="/vipstudy_suanfa/study/" class="btn_vipjoin btn_vipjoin03">进入算法课程</a></p>
                 <?php
@@ -353,19 +353,28 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
 <!--                <div class="radio_right_sub radio_right_sub3" style="background: #6b90ff;border-bottom-left-radius: 10px;">算法</div>-->
 <!--            </div>-->
         <div class="container">
+            <div style="margin-top: 20px;">
+                <?php
+                if ((!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'])) :
+                    ?>
+                    <a href="javascript:void(0);" style="position: absolute; right: 10px; font-size: 18px;" class="btn btn-lg btn-primary create_distribution">我要分销</a>
+                <?php
+                endif;
+                ?>
+            </div>
             <div style="min-width: 1170px;background: #5a83ff;margin-top: 70px;margin-bottom: 70px;box-shadow: 0px 0px 10px 1px #CCC;">
                 <table id="tab_class_sub">
                     <tr>
                         <?php
                         require_once __DIR__ . '/include/distribution.class.php';
                         $distribution = new Distribution();
-                        if (!isset($_GET['subject']) || '' == $_GET['subject'] || '1001' == $_GET['subject']) :
+                        if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '1001' == $_GET['subject']) :
                         ?>
                         <td>
                             <div class="radio_class1 radio_class">C语言课程</div>
                             <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/c/'<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
                             <?php
-                            if ('1001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) :
+                            if ('1001' == $_GET['subject']) :
                             ?>
                                 <a href="javascript:void(0);" style="position: absolute; right: 10px;" class="btn_kaitong create_distribution">我要分销</a>
                             <?php
@@ -375,13 +384,13 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                         </td>
                         <?php
                         endif;
-                        if (!isset($_GET['subject']) || '' == $_GET['subject'] || '2001' == $_GET['subject']) :
+                        if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '2001' == $_GET['subject']) :
                         ?>
                         <td>
                             <div class="radio_class2 radio_class">C++课程</div>
                             <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/cpp/<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
                             <?php
-                            if ('2001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) :
+                            if ('2001' == $_GET['subject']) :
                                 ?>
                                 <a href="javascript:void(0);" style="position: absolute; right: 10px;" class="btn_kaitong create_distribution">我要分销</a>
                             <?php
@@ -391,13 +400,13 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                         </td>
                         <?php
                         endif;
-                        if (!isset($_GET['subject']) || '' == $_GET['subject'] || '3001' == $_GET['subject']) :
+                        if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '3001' == $_GET['subject']) :
                         ?>
                         <td>
                             <div class="radio_class3 radio_class">算法课程</div>
                             <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/suanfa/<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
                             <?php
-                            if ('3001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) :
+                            if ('3001' == $_GET['subject']) :
                                 ?>
                                 <a href="javascript:void(0);" style="position: absolute; right: 10px;" class="btn_kaitong create_distribution">我要分销</a>
                             <?php
@@ -411,7 +420,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                     </tr>
                 </table>
                 <?php
-                if (!isset($_GET['subject']) || '' == $_GET['subject'] || '1001' == $_GET['subject']) :
+                if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '1001' == $_GET['subject']) :
                 ?>
                 <div class="ctn_class1 ctn_class">
                     
@@ -468,7 +477,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                 </div>
                 <?php
                 endif;
-                if (!isset($_GET['subject']) || '' == $_GET['subject'] || '2001' == $_GET['subject']) :
+                if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '2001' == $_GET['subject']) :
                 ?>
                 <div class="ctn_class2 ctn_class">
 
@@ -519,7 +528,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                 </div>
                 <?php
                 endif;
-                if (!isset($_GET['subject']) || '' == $_GET['subject'] || '3001' == $_GET['subject']) :
+                if (!isset($_GET['subject']) || '' == $_GET['subject'] || 'null' == $_GET['subject'] || '3001' == $_GET['subject']) :
                 ?>
                 <div class="ctn_class3 ctn_class">
 
@@ -905,18 +914,20 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                     <h4 class="modal-title">分销链接</h4>
                 </div>
                 <div class="modal-body">
-                    <div id="success_create">
+                    <div>
                         <div>人人分享、人人分销！<br>
                             分享给对编程感兴趣的朋友！赚取佣金,多级分销，真正躺着也能赚钱！<br>
                             点击复制链接，分享给潜在用户，赚取丰厚佣金！多级分销，躺着也有收益！还等什么？！ 复制开始分销吧!<br><br>
                             分销商交流QQ群：593370304  请备注分销账号<br>
                             收益统计请见：<a href="/oj/distribution.php">分销统计</a></div>
                         <br>
-                        <div>分销链接：<span id="distribution_url"></span> <div class="zclip"><a href="javascript:void(null);" data-clipboard-target="#distribution_url" id="copy_url">复制链接</a></div></div>
-                    </div>
-                    <div id="error_create">
+                        <div id="success_create">分销链接：<span id="distribution_url"></span> <div class="zclip"><a href="javascript:void(null);" data-clipboard-target="#distribution_url" id="copy_url">复制链接</a></div>
+                        </div>
+                        <div id="error_create">
 
+                        </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -997,7 +1008,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             $(".ctn_class1").attr("hidden",true);
         });
         $('.create_distribution').click(function () {
-            var url = '/oj/ajax_distribution_create.php?subject=<?=isset($_GET['subject']) ? $_GET['subject'] : ''?>';
+            var url = '/oj/ajax_distribution_create.php?subject=<?=isset($_GET['subject']) ? $_GET['subject'] : 'null'?>';
             <?php
             if (isset($_GET['ptcode'])) {
                 echo "url += '&ptcode=" . $_GET['ptcode'] . "';";
@@ -1007,7 +1018,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             $.getJSON(url, function (result) {
                 if ('0' != result.code) {
                     $('#error_create').show();
-                    $('#error_create').text(result.message);
+                    $('#error_create').html(result.message);
                     $('#success_create').hide();
                 } else {
                     $('#error_create').hide();
