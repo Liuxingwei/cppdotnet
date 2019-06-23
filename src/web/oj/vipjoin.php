@@ -264,6 +264,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             left: 40%;
             background: #FFF;
         }
+        .zclip {position: relative; display: inline-block; }
     </style>
   </head>
 
@@ -364,7 +365,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                             <div class="radio_class1 radio_class">C语言课程</div>
                             <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/c/'<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
                             <?php
-                            if ('1001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'])) :
+                            if ('1001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) :
                             ?>
                                 <a href="javascript:void(0);" style="position: absolute; right: 10px;" class="btn_kaitong create_distribution">我要分销</a>
                             <?php
@@ -380,7 +381,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                             <div class="radio_class2 radio_class">C++课程</div>
                             <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/cpp/<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
                             <?php
-                            if ('2001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'])) :
+                            if ('2001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) :
                                 ?>
                                 <a href="javascript:void(0);" style="position: absolute; right: 10px;" class="btn_kaitong create_distribution">我要分销</a>
                             <?php
@@ -396,7 +397,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                             <div class="radio_class3 radio_class">算法课程</div>
                             <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/suanfa/<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
                             <?php
-                            if ('3001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'])) :
+                            if ('3001' == $_GET['subject'] && isset($_SESSION['user_id']) && $distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) :
                                 ?>
                                 <a href="javascript:void(0);" style="position: absolute; right: 10px;" class="btn_kaitong create_distribution">我要分销</a>
                             <?php
@@ -911,7 +912,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                             分销商交流QQ群：593370304  请备注分销账号<br>
                             收益统计请见：<a href="/oj/distribution.php">分销统计</a></div>
                         <br>
-                        <div>分销链接：<span id="distribution_url"></span></div>
+                        <div>分销链接：<span id="distribution_url"></span> <div class="zclip"><a href="javascript:void(null);"    id="copy_url">复制链接</a></div></div>
                     </div>
                     <div id="error_create">
 
@@ -929,6 +930,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <?php include("template/$OJ_TEMPLATE/js.php");?>
+    <script src="/oj/ueditor/third-party/zeroclipboard/ZeroClipboard.js"></script>
 <script type="text/javascript">
     $(function(){
         <?php
@@ -1020,7 +1022,6 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
 </script>
 <script type="text/javascript">
     (function($){
-        $('')
         $.fn.myScroll = function(options){
         //默认配置
         var defaults = {
@@ -1068,7 +1069,6 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             });
 
         }
-
     })(jQuery);
 </script>
 <script type="text/javascript">
@@ -1077,6 +1077,13 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             speed:35, //数值越大，速度越慢
             rowHeight:105 //li的高度
         });
+        var client = new ZeroClipboard( document.getElementById("copy_url") );
+        client.on( "ready", function( readyEvent ) {
+            client.on( "aftercopy", function( event ) {
+                event.target.style.display = "none";
+                alert("复制成功");
+            } );
+        } );
     });
 </script>
 <script>

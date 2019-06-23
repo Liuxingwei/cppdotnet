@@ -88,5 +88,17 @@ $distributorsDb->where('level = ?', array('level' => 1));
 $distributorsDb->count();
 $distributors = $distributorsDb->totalRows();
 
+function getUserInfo($userId, $field) {
+    static $users;
+    if (isset($users[$userId][$field])) {
+        return $users[$userId][$field];
+    }
+    $db = new DB();
+    $db->table('users');
+    $db->where('user_id = ?', array('user_id' => $userId));
+    $row = $db->selectOne();
+    $users[$userId] = $row;
+    return $users[$userId][$field];
+}
 
 require_once 'distribution_statistics.tpl.php';

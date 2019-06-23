@@ -19,6 +19,7 @@ if (isset($_POST['setting']) && $_POST['setting'] != '') {
     $distribution->setIfNeedSpecialTop($_POST['if_need_special_top']);
     $distribution->setRebateScheme($_POST['rebate_scheme']);
     $distribution->setRebateRatio($_POST['rebate_ratio']);
+    $distribution->setDistributionPath($_POST['distribution_path']);
     $saveStatus = '分销设定保存成功';
 }
 require_once '../include/mysqli.php';

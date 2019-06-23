@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] =='') {
             'message' => '未指定科目',
             'data' => null
         );
-    } else if (!$distribution->checkPermission($_SESSION['user_id'])) {
+    } else if (!$distribution->checkPermission($_SESSION['user_id'], $_GET['subject'], $_GET['ptcode'])) {
         $res = array(
             'code' => '1003',
             'message' => '没有分销权限',

@@ -16,9 +16,9 @@ require_once dirname(__DIR__) . '/include/mysqli.php';
 $distributionDb = new DB();
 $distributionDb->table('distribution_amount');
 $distributionDb->fields('distribution_amount.*, goods.name_goods');
-$where = "distribution_amount.user_id = ?";
-$distributionDb->join("inner join goods on distribution_amount.goods_id = goods.id_goods");
-$param = array('user_id' => $_GET['user_id']);
+$where = "distribution_amount.user_id = ? and order_vippay.status = ?";
+$distributionDb->join("inner join goods on distribution_amount.goods_id = goods.id_goods inner join order_vippay on distribution_amount.order_id = order_vippay.order_id");
+$param = array('user_id' => $_GET['user_id'], 'status' => 1);
 if ('unsettle' == $_GET['state']) {
     $where .= " and distribution_amount.settle_state = ?";
     $param['settle_state'] = 0;

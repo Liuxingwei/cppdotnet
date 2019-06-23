@@ -42,6 +42,13 @@ endif;
                     <label>分销最高层级：</label> <input type="text" name="max_level" id="max_level" value="<?=$distribution->getMaxLevel()?>">
                 </fieldset>
                 <fieldset class="form-inline">
+                    <label>分销传播路径设置：</label>
+                    <select name="distribution_path">
+                        <option value="0"<?php if (0 == $distribution->getDistributionPath()) echo ' selected=\"selected\"' ?>>统一分销路径</option>
+                        <option value="1"<?php if (1 == $distribution->getDistributionPath()) echo ' selected=\"selected\"' ?>>单科分销路径</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-inline">
                     <label>分销收入方案：</label>
                     <select name="rebate_scheme">
                         <option value="0"<?php if (0 == $distribution->getRebateScheme()) echo ' selected=\"selected\"' ?>>任意两级返利</option>

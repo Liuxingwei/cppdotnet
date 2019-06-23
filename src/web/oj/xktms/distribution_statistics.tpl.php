@@ -59,6 +59,8 @@
                         <th>序号</th>
                         <th>用户id</th>
                         <th>分成总收入</th>
+                        <th>支付宝账户</th>
+                        <th>支付宝姓名</th>
                         <th>详情</th>
                     </tr>
                     </thead>
@@ -71,6 +73,8 @@
                         <td><?=$ti * ($_GET['tpage'] == '' ? 1 : (int) $_GET['tpage'])?></td>
                         <td><?=$trow['user_id']?></td>
                         <td><?=$trow['total']?></td>
+                        <td><?=getUserInfo($trow['user_id'],'alipay_account')?></td>
+                        <td><?=getUserInfo($trow['user_id'],'alipay_user')?></td>
                         <td><a href="javascript:void(0);" data-userid="<?=$trow['user_id']?>" data-state="total" class="detail-link">详情</a></td>
                     </tr>
                     <?php
@@ -92,6 +96,8 @@
                         <th>序号</th>
                         <th>用户id</th>
                         <th>未结算分成收入</th>
+                        <th>支付宝账户</th>
+                        <th>支付宝姓名</th>
                         <th>详情</th>
                     </tr>
                     </thead>
@@ -105,6 +111,8 @@
                             <td><?=$ui * ($_GET['upage'] == '' ? 1 : (int) $_GET['upage'])?></td>
                             <td><?=$urow['user_id']?></td>
                             <td><?=$urow['total']?></td>
+                            <td><?=getUserInfo($urow['user_id'],'alipay_account')?></td>
+                            <td><?=getUserInfo($urow['user_id'],'alipay_user')?></td>
                             <td><a href="javascript:void(0);" data-userid="<?=$trow['user_id']?>" data-state="unsettle" class="detail-link">详情</a></td>
                         </tr>
                     <?php
@@ -128,6 +136,8 @@
                         <th>序号</th>
                         <th>用户id</th>
                         <th>已结算分成收入</th>
+                        <th>支付宝账户</th>
+                        <th>支付宝姓名</th>
                         <th>详情</th>
                     </tr>
                     </thead>
@@ -140,6 +150,8 @@
                             <td><?=$si * ($_GET['spage'] == '' ? 1 : (int) $_GET['spage'])?></td>
                             <td><?=$srow['user_id']?></td>
                             <td><?=$srow['total']?></td>
+                            <td><?=getUserInfo($srow['user_id'],'alipay_account')?></td>
+                            <td><?=getUserInfo($srow['user_id'],'alipay_user')?></td>
                             <td><a href="javascript:void(0);" data-userid="<?=$trow['user_id']?>" data-state="settled" class="detail-link">详情</a></td>
                         </tr>
                     <?php

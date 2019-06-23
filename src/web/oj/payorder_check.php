@@ -210,9 +210,11 @@ $user_id=$_SESSION['user_id'];
             $(".radio input").change(function(){
                 $(":checked").parent().parent().addClass("radio_selected").siblings().removeClass("radio_selected");
             });
-
+            $('.radio input').parent().parent().addClass('radio_selected');
+            $("#payol").attr("hidden",false);
             $("#paykey").attr("hidden",true);
             $("#radio_payway1").addClass("radio_way_selected");
+            $()
             $("#radio_payway1").click(function(){
                 $("#radio_payway1").addClass("radio_way_selected");
                 $("#radio_payway2").removeClass("radio_way_selected");

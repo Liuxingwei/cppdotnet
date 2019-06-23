@@ -3,12 +3,19 @@
  * 分销类，暂时做成一个大一统的类，再视功能多寡拆分
  * @author liuxingwei matchless@163.com
  */
-
+require_once __DIR__ . '/mysqli.php';
 class Distribution
 {
 
+    /**
+     * 返利级别设置，0为最后两级返利，1为全部级别返利
+     */
     const REBATE_SCHEME_TWOLEVEL = 0;
     const REBATE_SCHEME_ALLLEVEL = 1;
+
+    const UNIQUE_DISTRIBUTION_PATH = 0;
+    const INDEPENDENT_DISTRIBUTION_PATH = 1;
+
     /**
      * @var mysqli link resource
      */
@@ -24,6 +31,14 @@ class Distribution
      */
     private $optionsFile;
 
+    /**
+     * @var DB 数据库操作类实例
+     */
+    private $db;
+
+    /**
+     * @var array 未添加推广码的推广链接
+     */
     private $urls;
 
     /**
@@ -33,21 +48,28 @@ class Distribution
     {
         $this->optionsFile  = __DIR__ . '/distributions.json';
         $this->mysqli = $GLOBALS['mysqli'];
+        $this->db = new DB();
         $this->initOptions();
         $this->urls = array(
             'c' => 'http://' . $_SERVER['HTTP_HOST'] . '/vipjoin/1001',
             'cpp' => 'http://' . $_SERVER['HTTP_HOST'] . '/vipjoin/2001',
             'suanfa' => 'http://' . $_SERVER['HTTP_HOST'] . '/vipjoin/3001',
+            'null' => 'http+//' . $_SERVER['HTTP_HOST'] . '_vipjoin/null',
         );
     }
 
+    public function db() {
+        return $this->db;
+    }
 
     /**
      * 分销类的权限校验，判别指定id的用户是否有权限使用分销功能
      * @param $userId
+     * @param $subject string 科目，如果不指定则为null，表示不带栏目信息的分销权限
+     * @param $parentpromotionCode string
      * @return boolean 有权限返回 true，无权限返回 false;
      */
-    public function checkPermission($userId)
+    public function checkPermission($userId, $subject = null, $parentpromotionCode = null)
     {
         if ($this->getIfNeedVip()) {
             $result = $this->mysqli->query("SELECT * FROM users WHERE user_id = '" . $userId . "'");
@@ -58,11 +80,14 @@ class Distribution
             }
         }
         if ($this->getMaxLevel() != 0) {
-            if ($this->getLevel($userId) > $this->getMaxLevel()) {
+            if ($this->getLevel($userId, $subject) > $this->getMaxLevel()) {
+                return false;
+            }
+            if (!is_null($parentpromotionCode) && $this->getLevelBypromotionCode($parentpromotionCode, $subject) >= $this->getMaxLevel()) {
                 return false;
             }
         }
-        if ($this->getState($userId) == 0) {
+        if ($this->getState($userId, $subject) == 0) {
             return false;
         }
         return true;
@@ -71,11 +96,17 @@ class Distribution
     /**
      * 获取用户状态
      * @param $userId
+     * @param $subject string 科目
      * @return int|object
      */
-    public function getState($userId)
+    public function getState($userId, $subject = null)
     {
-        $result = $this->mysqli->query("SELECT state FROM promotion_code WHERE user_id = '" . $userId . "'");
+
+        $sql = "SELECT state FROM promotion_code WHERE user_id = '" . $userId . "'";
+        if (!is_null($subject)) {
+            $sql .= " and subject = '" . $subject . "'";
+        }
+        $result = $this->mysqli->query($sql);
         if (0 == $result->num_rows) {
             return 1;
         }
@@ -85,12 +116,17 @@ class Distribution
 
     /**
      * 获取用户的分销级别
-     * @param $userId
+     * @param $userId string
+     * @param $subject string
      * @return int|object
      */
-    public function getLevel($userId)
+    public function getLevel($userId, $subject = null)
     {
-        $result = $this->mysqli->query("SELECT level FROM promotion_code WHERE user_id = '" . $userId . "'");
+        $sql = "SELECT level FROM promotion_code WHERE user_id = '" . $userId . "'";
+        if (is_null($subject) && $this->getDistributionPath() != self::UNIQUE_DISTRIBUTION_PATH) {
+            $sql .= " and subject = '" . $subject . "'";
+        }
+        $result = $this->mysqli->query($sql);
         if (0 == $result->num_rows) {
             return 0;
         }
@@ -160,7 +196,7 @@ class Distribution
 
     /**
      * 获取分销最大级数
-     * @return maxLevel
+     * @return int
      */
     public function getMaxLevel()
     {
@@ -215,9 +251,30 @@ class Distribution
         $this->saveOptions();
     }
 
+    /**
+     * 获取分销返利比例设置
+     * @return int
+     */
     public function getRebateRatio()
     {
         return isset($this->options['rebate_ratio']) ? $this->options['rebate_ratio'] : 0;
+    }
+
+    /**
+     * 设置分销途径，0为统一路径分销，1为按科目路径分销
+     * @param $distributionPath
+     */
+    public function setDistributionPath($distributionPath) {
+        $this->options['distribution_path'] = $distributionPath;
+        $this->saveOptions();
+    }
+
+    /**
+     * 获取分销途径设置
+     * @return int|mixed
+     */
+    public function getDistributionPath() {
+        return isset($this->options['distribution_path']) ? $this->options['distribution_path'] : self::UNIQUE_DISTRIBUTION_PATH;
     }
 
     /**
@@ -253,15 +310,21 @@ class Distribution
 
     /**
      * 获取指定用户指定科目的推广码
-     * @param $userId 用户id
-     * @param $subject 科目
-     * @return array|bool|nullΩ
+     * @param $userId string 用户id
+     * @param $subject string 科目
+     * @return array|bool|null
      */
-    public function getPromotionCode($userId, $subject)
+    public function getPromotionCode($userId, $subject = null)
     {
         $db = new DB();
         $db->table('promotion_code');
-        $db->where('user_id = ? AND subject = ?', array('user_id' => $userId, 'subject' => $subject));
+        $where = 'user_id = ?';
+        $param = array('user_id' => $userId);
+        if (!is_null($subject) && $this->getDistributionPath() == self::UNIQUE_DISTRIBUTION_PATH) {
+            $where .= ' and subject = ?';
+            $param['subject'] = $subject;
+        }
+        $db->where($where,$param);
         $row = $db->selectOne();
         if ($row) {
             return $row;
@@ -272,27 +335,37 @@ class Distribution
 
     /**
      * 创建推广链接
-     * @param $promotionCode 推广码
-     * @param $subject 科目
+     * @param $promotionCode string 推广码
+     * @param $subject int 科目
      * @return string 推广链接
      */
-    public function createPromotionUrl($promotionCode, $subject)
+    public function createPromotionUrl($promotionCode, $subject = null)
     {
-        $url = $this->urls[$subject] . '/' . $promotionCode;
+        if (!is_null($subject) && $this->getDistributionPath() == self::UNIQUE_DISTRIBUTION_PATH) {
+            $url = $this->urls[$subject] . '/' . $promotionCode;
+        } else {
+            $url = $this->urls['null'] . '/' . $promotionCode;
+        }
         return $url;
     }
 
     /**
      * 获取指定科目、推广码
-     * @param $promotionCode
-     * @param $subject
+     * @param $promotionCode string
+     * @param $subject string
      * @return array|bool|null
      */
-    public function getParentPromotion($promotionCode, $subject)
+    public function getParentPromotion($promotionCode, $subject = null)
     {
         $db = new DB();
         $db->table('promotion_code');
-        $db->where('promotion_code = ? AND subject = ?', array('promotion_code' => $promotionCode, 'subject' => $subject));
+        $where = 'promotion_code = ?';
+        $param = array('promotion_code' => $promotionCode);
+        if (!is_null($subject) && $this->getDistributionPath() == self::UNIQUE_DISTRIBUTION_PATH) {
+            $where .= ' and subject = ?';
+            $param['subject'] = $subject;
+        }
+        $db->where($where, $param);
         $row = $db->selectOne();
         if ($row) {
             return $row;
@@ -300,10 +373,23 @@ class Distribution
             return false;
         }
     }
+    
+    public function getLevelBypromotionCode($promotionCode, $subject = null) {
+        $sql = "SELECT level FROM promotion_code WHERE promotion_code = '" . $promotionCode . "'";
+        if (!is_null($subject) && $this->getDistributionPath() != self::UNIQUE_DISTRIBUTION_PATH) {
+            $sql .= " AND subject = '" . $subject . "'";
+        }
+        $result = $this->mysqli->query($sql);
+        if (0 == $result->num_rows) {
+            return 0;
+        }
+        $level = $result->fetch_field();
+        return $level;
+    }
 
     /**
      * 获取空推广码的用户推广信息
-     * @param $userId
+     * @param $userId string
      * @return array|bool|null
      */
     public function getEmptyPromotion($userId) {
@@ -345,14 +431,17 @@ class Distribution
         $db = new DB();
         $db->table('promotion_code');
         $promotionCode = $this->generatePromotionCode($userId);
-        $db->insert(array(
+        $insertData = array(
             'user_id' => $userId,
             'promotion_code' => $promotionCode,
             'parent_code' => $parentPromotionCode,
-            'subject' => $subject,
             'level' => $level,
             'create_time' => date('Y-m-d H:i:s')
-        ));
+        );
+        if (!is_null($subject) && $this->getDistributionPath() == self::UNIQUE_DISTRIBUTION_PATH) {
+            $insertData['subject'] = $subject;
+        }
+        $db->insert($insertData);
         return $promotionCode;
     }
 
