@@ -912,7 +912,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                             分销商交流QQ群：593370304  请备注分销账号<br>
                             收益统计请见：<a href="/oj/distribution.php">分销统计</a></div>
                         <br>
-                        <div>分销链接：<span id="distribution_url"></span> <div class="zclip"><a href="javascript:void(null);"    id="copy_url">复制链接</a></div></div>
+                        <div>分销链接：<span id="distribution_url"></span> <div class="zclip"><a href="javascript:void(null);" data-clipboard-target="#distribution_url" id="copy_url">复制链接</a></div></div>
                     </div>
                     <div id="error_create">
 
@@ -930,7 +930,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <?php include("template/$OJ_TEMPLATE/js.php");?>
-    <script src="/oj/ueditor/third-party/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="/oj/template/bs3/js/clipboard.min.js"></script>
 <script type="text/javascript">
     $(function(){
         <?php
@@ -1077,13 +1077,17 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
             speed:35, //数值越大，速度越慢
             rowHeight:105 //li的高度
         });
-        var client = new ZeroClipboard( document.getElementById("copy_url") );
-        client.on( "ready", function( readyEvent ) {
-            client.on( "aftercopy", function( event ) {
-                event.target.style.display = "none";
-                alert("复制成功");
-            } );
-        } );
+        var clipboard = new ClipboardJS('#copy_url');
+
+        clipboard.on('success', function(e) {
+            alert("复制成功");
+            console.info('Action:', e.action);
+        });
+
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
     });
 </script>
 <script>
