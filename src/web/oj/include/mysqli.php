@@ -250,7 +250,7 @@ class DB
 
     public function count()
     {
-        $sql = 'SELECT count(*) FROM `' . $this->table . '`';
+        $sql = 'SELECT count(*) total FROM `' . $this->table . '`';
         if (!is_null($this->join)) {
             $sql .= ' ' . $this->join;
         }
@@ -269,8 +269,10 @@ class DB
         }
         $sth->execute();
         $result = $sth->get_result();
-        $res = $result->fetch_row();
-        $this->count = $res[0];
+        $this->count = 0;
+        while ($row = $result->fetch_assoc()) {
+            $this->count += $row['total'];
+        }
         return $this;
     }
 
