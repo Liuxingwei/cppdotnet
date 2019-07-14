@@ -162,7 +162,7 @@ $user_id=$_SESSION['user_id'];
                     <div class="radio">
                         <img class="img_tuijian" src="/oj/template/<?php echo $OJ_TEMPLATE; ?>/img/tuijian.gif">
                         <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="c-12m">C语言课程12个月　(5折)<span class="radio_amount">￥539</span>
+                            <input type="hidden" name="vip_size" value="c-12m">C语言课程12个月　(5折)<span class="radio_amount">￥539</span>
                         </label>
                     </div>
                     <?php
@@ -172,7 +172,7 @@ $user_id=$_SESSION['user_id'];
                     <div class="radio">
                         <img class="img_tuijian" src="/oj/template/<?php echo $OJ_TEMPLATE; ?>/img/tuijian.gif">
                         <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="cpp-12m">C++课程12个月　(5折)<span class="radio_amount">￥839</span>
+                            <input type="hidden" name="vip_size" value="cpp-12m">C++课程12个月　(5折)<span class="radio_amount">￥839</span>
                         </label>
                     </div>
                     <?php
@@ -182,7 +182,7 @@ $user_id=$_SESSION['user_id'];
                     <div class="radio">
                         <img class="img_tuijian" src="/oj/template/<?php echo $OJ_TEMPLATE; ?>/img/tuijian.gif">
                         <label>
-                            <input style="display:none;" type="radio" name="vip_size" value="suanfa-12m">算法课程12个月　(5折)<span class="radio_amount">￥1139</span>
+                            <input type="hidden" name="vip_size" value="suanfa-12m">算法课程12个月　(5折)<span class="radio_amount">￥1139</span>
                         </label>
                     </div>
                     <?php
@@ -214,7 +214,6 @@ $user_id=$_SESSION['user_id'];
             $("#payol").attr("hidden",false);
             $("#paykey").attr("hidden",true);
             $("#radio_payway1").addClass("radio_way_selected");
-            $()
             $("#radio_payway1").click(function(){
                 $("#radio_payway1").addClass("radio_way_selected");
                 $("#radio_payway2").removeClass("radio_way_selected");
