@@ -192,7 +192,8 @@ $user_id=$_SESSION['user_id'];
                 <div class="div_row"><span class="text_l">购买用户：</span><?php echo $user_id; ?></div>
                 <div class="div_row_last">
                     <div style="float: right;"><!-- <span class="amount">￥90</span> -->
-                        　<button type="submit" class="btn btn-primary">提交订单</button>
+                        <input type="hidden" name="prom_subject" value="<?=$_GET['prom_subject']?>">
+                        <button type="submit" class="btn btn-primary">提交订单</button>
                     </div>
                 </div>
                 </form>

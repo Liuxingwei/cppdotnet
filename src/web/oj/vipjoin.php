@@ -372,7 +372,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                         ?>
                         <td>
                             <div class="radio_class1 radio_class">C语言课程</div>
-                            <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/c/'<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
+                            <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/c/<?=$ptcodeStr?>/<?=$_GET['subject']?>" class="btn_kaitong">开通</a>
                             <?php
                             if ('1001' == $_GET['subject']) :
                             ?>
@@ -388,7 +388,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                         ?>
                         <td>
                             <div class="radio_class2 radio_class">C++课程</div>
-                            <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/cpp/<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
+                            <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/cpp/<?=$ptcodeStr?>/<?=$_GET['subject']?>" class="btn_kaitong">开通</a>
                             <?php
                             if ('2001' == $_GET['subject']) :
                                 ?>
@@ -404,7 +404,7 @@ $view_title="VIP学习系统|VIP会员 - C语言网"
                         ?>
                         <td>
                             <div class="radio_class3 radio_class">算法课程</div>
-                            <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/suanfa/<?=$ptcodeStr?>" class="btn_kaitong">开通</a>
+                            <div style="margin-bottom: 20px;"><a href="/vipmb/order_check/suanfa/<?=$ptcodeStr?>/<?=$_GET['subject']?>" class="btn_kaitong">开通</a>
                             <?php
                             if ('3001' == $_GET['subject']) :
                                 ?>

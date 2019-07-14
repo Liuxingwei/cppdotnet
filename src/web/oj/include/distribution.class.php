@@ -42,6 +42,19 @@ class Distribution
     private $urls;
 
     /**
+     * 课程与编码的关系
+     * @var array
+     */
+    private $subject2lesson = array(
+        'c' => '1001',
+        'cpp' => '2001',
+        'suanfa' => '3001',
+        'null' => 'null'
+    );
+
+    private $protocol = 'https';
+
+    /**
      * 初始化数据库访问链接、初始化数据库访问链接、分销配置
      */
     public function __construct()
@@ -50,12 +63,10 @@ class Distribution
         $this->mysqli = $GLOBALS['mysqli'];
         $this->db = new DB();
         $this->initOptions();
-        $this->urls = array(
-            'c' => 'http://' . $_SERVER['HTTP_HOST'] . '/vipjoin/1001',
-            'cpp' => 'http://' . $_SERVER['HTTP_HOST'] . '/vipjoin/2001',
-            'suanfa' => 'http://' . $_SERVER['HTTP_HOST'] . '/vipjoin/3001',
-            'null' => 'http+//' . $_SERVER['HTTP_HOST'] . '_vipjoin/null',
-        );
+        $this->urls = array();
+        foreach ($this->subject2lesson as $key => $val) {
+            $this->urls[$key] = $this->protocol . '://' . $_SERVER['HTTP_HOST'] . '/vipjoin/' . $val;
+        }
     }
 
     public function db() {
@@ -452,10 +463,11 @@ class Distribution
      * @param $payUserId
      * @param $promotionCode
      * @param $goodsId
+     * @param $subject
      * @param $times int 递归次数，不设置则为1
      * @return bool
      */
-    public function calaPromotionProfit($orderId, $amount, $payUserId, $promotionCode, $goodsId, $times = 1){
+    public function calaPromotionProfit($orderId, $amount, $payUserId, $promotionCode, $goodsId, $subject, $times = 1){
         $goodsSubjectDb = new DB();
         $goodsSubjectDb->table('goods_subject');
         $goodsSubjectDb->where('goods_id = ?', array('goods_id' => $goodsId));
@@ -463,9 +475,10 @@ class Distribution
         if (is_null($goodsSubject)) {
             return false;
         }
+        $lesson2subject = array_flip($this->subject2lesson);
         $promotionDb = new DB();
         $promotionDb->table('promotion_code');
-        $promotionDb->where('promotion_code = ? AND subject = ?', array('promotion_code' => $promotionCode, 'subject' => $goodsSubject['subject']));
+        $promotionDb->where('promotion_code = ? AND subject = ?', array('promotion_code' => $promotionCode, 'subject' => $lesson2subject[$subject]));
         $promotion = $promotionDb->selectOne();
         if (is_null($promotion)) {
             return true;
@@ -485,6 +498,6 @@ class Distribution
         if (($this->getRebateScheme() == self::REBATE_SCHEME_TWOLEVEL && 2 == $times) || is_null($promotion['parent_code']) || empty($promotion['promotion_code']) ) {
             return true;
         }
-        return $this->calaPromotionProfit($orderId, $amount, $payUserId, $promotion['parent_code'], $goodsId, $times + 1);
+        return $this->calaPromotionProfit($orderId, $amount, $payUserId, $promotion['parent_code'], $goodsId, $subject, $times + 1);
     }
 }
